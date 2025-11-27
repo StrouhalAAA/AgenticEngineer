@@ -18,6 +18,8 @@ Reusable slash command templates for Claude Code located in `CommandsTemplates/`
 | `/chore` | Plan maintenance tasks and technical debt resolution |
 | `/implement` | Execute a plan from `specs/*.md` and report completed work |
 | `/tools` | List all built-in Claude Code development tools |
+| `/QuickPlan` | Quickly create a concise implementation plan and save to `specs/` directory |
+| `/load-bundle` | Load context from a previous agent session (JSONL bundle) to continue work |
 
 ### How to Use
 
@@ -31,12 +33,14 @@ Reusable slash command templates for Claude Code located in `CommandsTemplates/`
 .
 ├── README.md
 └── CommandsTemplates/
-    ├── prime.md      # Codebase initialization
-    ├── feature.md    # Feature planning template
-    ├── bug.md        # Bug fix planning template
-    ├── chore.md      # Chore/maintenance planning
-    ├── implement.md  # Plan execution template
-    └── tools.md      # List available tools
+    ├── prime.md        # Codebase initialization
+    ├── feature.md      # Feature planning template
+    ├── bug.md          # Bug fix planning template
+    ├── chore.md        # Chore/maintenance planning
+    ├── implement.md    # Plan execution template
+    ├── tools.md        # List available tools
+    ├── QuickPlan.md    # Quick implementation planning
+    └── load-bundle.md  # Load previous agent context
 ```
 
 ## Getting Started
