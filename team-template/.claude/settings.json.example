@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "bash .claude/hooks/check-playbook-updates.sh",
+        "timeout": 5,
+        "once": true
+      }
+    ]
+  }
+}

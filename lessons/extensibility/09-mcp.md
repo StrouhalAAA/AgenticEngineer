@@ -1,6 +1,8 @@
-# Module 08: MCP Integration
+# Module 09: MCP Integration
 
 > **Connect Claude Code to external tools and services via Model Context Protocol.**
+
+> 🆕 **Updated for Claude Code 2.1.0** — Includes `list_changed` notifications for dynamic tool updates.
 
 ---
 
@@ -153,6 +155,83 @@ Server runs as HTTP service:
 
 ---
 
+## New in 2.1.0: Dynamic Tool Updates
+
+MCP servers can now notify Claude Code when their available tools, prompts, or resources change. This enables dynamic capability updates without session restart.
+
+### Server-Side Implementation
+
+```typescript
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+
+const server = new Server(
+  { name: 'dynamic-tools', version: '1.0.0' },
+  {
+    capabilities: {
+      tools: { listChanged: true },
+      prompts: { listChanged: true },
+      resources: { listChanged: true }
+    }
+  }
+);
+
+// When tools change (e.g., new database table discovered):
+await server.notification({
+  method: 'notifications/tools/list_changed',
+  params: {}
+});
+
+// Claude Code automatically refreshes available capabilities
+```
+
+### Use Cases
+
+**Dynamic Database Tools:**
+```typescript
+// Schema watcher detects new table
+schemaWatcher.on('tableAdded', async (tableName) => {
+  // Generate new query tool for the table
+  addQueryTool(tableName);
+  
+  // Notify Claude Code
+  await server.notification({
+    method: 'notifications/tools/list_changed',
+    params: {}
+  });
+});
+```
+
+**Feature-Flag Controlled Tools:**
+```typescript
+featureFlags.on('change', async (flags) => {
+  if (flags.experimentalFeatures) {
+    enableExperimentalTools();
+  } else {
+    disableExperimentalTools();
+  }
+  
+  await server.notification({
+    method: 'notifications/tools/list_changed',
+    params: {}
+  });
+});
+```
+
+**Permission-Based Tool Visibility:**
+```typescript
+// User role changes, update available tools
+userSession.on('roleChange', async (newRole) => {
+  updateToolsForRole(newRole);
+  
+  await server.notification({
+    method: 'notifications/tools/list_changed',
+    params: {}
+  });
+});
+```
+
+---
+
 ## Security Best Practices
 
 1. **Use fine-grained tokens** with minimal scopes
@@ -241,6 +320,7 @@ Server runs as HTTP service:
 | **Environment** | Use `${VAR}` for secrets |
 | **Transport** | STDIO (local) or HTTP (remote) |
 | **Security** | Minimal permissions, never commit secrets |
+| **list_changed** | Dynamic tool updates without reconnection (2.1.0+) |
 
 ---
 
@@ -248,4 +328,4 @@ Server runs as HTTP service:
 
 ## Next Module
 
-Continue to [09-plugins.md](./09-plugins.md) to learn how to bundle and share your Claude Code setup with your team.
+Continue to [10-plugins.md](./10-plugins.md) to learn how to bundle and share your Claude Code setup with your team.

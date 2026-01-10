@@ -2,10 +2,87 @@
 
 All notable changes to this repository.
 
-| Date | Version | Changes |
-|------|---------|---------|
-| 2025-01-10 | 2.0.0 | Simplified structure, added START_HERE.md |
-| 2025-01-10 | 1.0.0 | Initial release with fundamentals |
+| Date | Version | Priority | Changes |
+|------|---------|----------|---------|
+| 2026-01-10 | 2.3.0 | | Added team notification system |
+| 2025-01-10 | 2.2.0 | | Reorganized lessons into thematic sections |
+| 2025-01-10 | 2.1.0 | | Added Forked Context, enhanced `/feature` command |
+| 2025-01-10 | 2.0.0 | | Simplified structure, added START_HERE.md |
+| 2025-01-10 | 1.0.0 | | Initial release with fundamentals |
+
+> **Priority column**: Updates marked with ⭐ contain important changes your team should review.
+
+---
+
+## [2.3.0] - 2026-01-10
+
+### Added
+- **Team notification system** for cross-repo update awareness
+  - SessionStart hook pattern for checking playbook updates
+  - Changelog format with priority markers
+  - Team template in `team-template/` directory
+
+### Why This Matters
+Teams maintaining this playbook separately from their working repos can now
+be automatically notified of important updates when starting Claude Code sessions.
+
+## [2.2.0] - 2025-01-10
+
+### Changed
+- **Reorganized lessons into 4 thematic sections**:
+  - `foundations/` - Core concepts, commands, skills (01-03)
+  - `configuration/` - Settings, CLAUDE.md, hooks (04-06)
+  - `context-management/` - Subagents, forked context (07-08)
+  - `extensibility/` - MCP, plugins (09-10)
+- **Renumbered lessons** for logical flow:
+  - Hooks: 07 → 06 (now in configuration)
+  - Subagents: 06 → 07 (now in context-management)
+  - Forked Context: 10 → 08 (now in context-management)
+  - MCP: 08 → 09 (now in extensibility)
+  - Plugins: 09 → 10 (now in extensibility)
+
+### Added
+- `lessons/README.md` - Learning path overview with thematic navigation
+- `lessons/context-management/README.md` - Decision guide for isolation strategies
+
+### Technical Notes
+- All cross-references updated to new paths
+- Git history preserved via `git mv`
+- Reference files updated with new lesson paths
+
+## [2.1.0] - 2025-01-10
+
+### Added
+- **Module 10: Forked Context** (`lessons/10-context-fork.md`)
+  - Deep dive on `context: fork` frontmatter (Claude Code 2.1.0 feature)
+  - Comparison: Main context vs Subagents vs Forked context
+  - Decision matrix for choosing isolation strategy
+  - 6 production-ready command examples:
+    - `/feature` - Feature analysis with forked context
+    - `/analyse` - Deep code analysis
+    - `/review` - PR review
+    - `/impact` - Change impact analysis
+    - `/standup` - Session summary
+    - `/security-scan` - Security audit
+  - 2 skill examples with forked context:
+    - `codebase-research` - Pattern discovery skill
+    - `prd-validator` - PRD validation skill
+
+### Changed
+- **Enhanced `/feature` command** with `context: fork` for cleaner analysis
+  - Extensive codebase research without context pollution
+  - Added analysis process section
+  - Added complexity assessment to output
+- **Updated `lessons/03-skills.md`** with "Advanced: Forked Context" section
+- **Updated `lessons/06-subagents.md`** with comparison section
+- **Updated `reference/skills/examples.md`** with forked context patterns
+- **Updated `CLAUDE.md`** with Module 10 reference and context isolation summary
+
+### Technical Notes
+- `context: fork` requires Claude Code 2.1.0+
+- Fork inherits conversation history (unlike subagents)
+- Fork discards execution traces (unlike main context)
+- Best for: analysis, review, research that needs history but shouldn't pollute
 
 ## [2.0.0] - 2025-01-10
 

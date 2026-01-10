@@ -173,7 +173,7 @@ Install with explicit scope:
 
 ## LSP Plugins (Code Intelligence)
 
-LSP plugins provide IDE-like code intelligence with **900x performance improvement**:
+LSP plugins provide IDE-like code intelligence — the same technology that powers VS Code's "Go to Definition", "Find All References", and real-time error detection. **Introduced in v2.0.74.**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -190,10 +190,26 @@ LSP plugins provide IDE-like code intelligence with **900x performance improveme
 │  Time: ~45 seconds                 Time: ~50ms               │
 │  Result: May miss cases            Result: Exact match       │
 │                                                              │
+│  "Find all references"             "Find all references"     │
+│  Claude: *reads 100 files*         Claude: *queries server*  │
+│  Time: minutes                     Time: milliseconds        │
+│                                                              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Install LSP Plugins
+**Why this matters**: Before LSP, Claude Code was doing sophisticated grep searches through text patterns. Now it can query language servers directly — the same way you Ctrl+Click in your IDE.
+
+### Step 1: Enable LSP Tools (Required)
+
+```bash
+# Add to your shell profile (.bashrc, .zshrc, etc.)
+export ENABLE_LSP_TOOLS=1
+
+# Apply the change
+source ~/.zshrc  # or restart your terminal
+```
+
+### Step 2: Install LSP Plugins
 
 ```bash
 # TypeScript/JavaScript
@@ -207,17 +223,58 @@ pip install pyright
 # Rust
 /plugin install rust-analyzer-lsp@claude-plugins-official
 rustup component add rust-analyzer
+
+# Go
+go install golang.org/x/tools/gopls@latest
+```
+
+### Step 3: Verify Setup
+
+```bash
+# Check plugin is installed
+/plugin  # Navigate to "Installed" tab
+
+# Verify binary is in PATH
+which pyright  # or vtsls, gopls, etc.
+
+# Test with a prompt
+> Find all references to handleSubmit using LSP
 ```
 
 ### LSP Operations
 
-| Operation | What It Does |
-|-----------|-------------|
-| `goToDefinition` | Jump to where symbol is defined |
-| `findReferences` | Find all usages of symbol |
-| `hover` | Show type info and documentation |
-| `documentSymbol` | View file structure |
-| `getDiagnostics` | Real-time errors and warnings |
+| Operation | What It Does | Use Case |
+|-----------|-------------|----------|
+| `goToDefinition` | Jump to exact file/line where symbol is defined | Navigating unfamiliar codebases |
+| `findReferences` | Find every usage across entire project | Refactoring, impact analysis |
+| `hover` | Return type hints, parameters, documentation | Understanding function signatures |
+| `documentSymbol` | List all symbols in a file | Quick file overview |
+| `workspaceSymbol` | Search symbols project-wide | Finding methods/classes by name |
+| `getDiagnostics` | Real-time errors and warnings | Catching errors before runtime |
+
+### When to Use LSP vs. Regular Search
+
+| Use LSP When... | Use Regular Search When... |
+|-----------------|---------------------------|
+| Large codebases (100s of files) | Small projects, quick scripts |
+| Need precise function signatures | Simple "find this string" tasks |
+| Refactoring (need to know what breaks) | Grep-style text queries |
+| Debugging across multiple files | |
+
+### LSP Prompt Tips
+
+```
+# Be explicit when you want LSP
+> Find all references to processRequest using LSP
+> Where is displayError defined? Use LSP
+> What parameters does handleSubmit accept? Use LSP
+```
+
+### Current Limitations
+
+1. **No visual indicator** — No status bar showing LSP is running
+2. **Binary required separately** — Plugin alone isn't enough
+3. **Check PATH** — If "No LSP server available", run `which pyright` to verify
 
 ---
 

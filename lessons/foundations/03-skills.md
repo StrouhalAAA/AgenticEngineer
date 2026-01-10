@@ -2,6 +2,8 @@
 
 > **Understand progressive disclosure and auto-invoked capabilities.**
 
+> 🆕 **Updated for Claude Code 2.1.0** — Includes hot-reload, agent field, and user-invocable options.
+
 ---
 
 ## Commands vs Skills: What's the Difference?
@@ -95,8 +97,15 @@ Skills live in dedicated directories:
 ---
 name: pdf-processing
 description: Create, edit, fill, and extract PDF files using Python
-tools: Read, Write, Edit, Bash(python:*)
+allowed-tools:                    # YAML-style list (2.1.0+)
+  - Read
+  - Write
+  - Edit
+  - Bash(python:*)
 model: sonnet
+context: fork                      # Optional: isolated execution (2.1.0+)
+agent: general-purpose             # Optional: specify executing agent (2.1.0+)
+user-invocable: true               # Optional: show in slash menu (2.1.0+)
 ---
 
 # PDF Processing Skill
@@ -252,6 +261,126 @@ description: "Use this for files"  # No clear trigger
 
 ---
 
+## New in 2.1.0: Skills Hot-Reload
+
+Skills now **activate immediately** when created or modified—no session restart required:
+
+```bash
+# While Claude Code is running, edit a skill
+vim .claude/skills/my-skill/SKILL.md
+
+# Test immediately
+> /my-skill analyze this code
+# Works instantly!
+```
+
+### Why This Matters
+
+Previously, iterating on skills required:
+1. Edit skill file
+2. Exit Claude Code
+3. Restart session
+4. Test changes
+5. Repeat...
+
+Now the feedback loop is instant—edit, save, test.
+
+---
+
+## New in 2.1.0: Skill Visibility Options
+
+### Slash Command Menu
+
+Skills now appear in the `/` autocomplete menu by default. To hide a skill:
+
+```yaml
+---
+name: internal-analysis
+description: Internal analysis helper
+user-invocable: false    # Hidden from slash menu
+---
+```
+
+**Use `user-invocable: false` when:**
+- Skill is called by other skills/commands only
+- Skill is auto-invoked based on context, not user command
+- Internal helper that shouldn't be directly triggered
+
+### Agent Specification
+
+New `agent` field lets you specify which agent type executes the skill:
+
+```yaml
+---
+name: research-explorer
+description: Deep codebase research
+agent: general-purpose    # Specify agent type
+context: fork
+---
+```
+
+### YAML-Style Tool Lists
+
+Cleaner syntax for `allowed-tools`:
+
+```yaml
+# Old style (still works)
+tools: Read, Write, Edit, Bash(git:*)
+
+# New YAML-style (2.1.0+)
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash(git:*)
+```
+
+---
+
+## Advanced: Forked Context Execution
+
+Skills can run in **isolated forked contexts** using `context: fork` in frontmatter:
+
+```yaml
+---
+name: codebase-research
+description: Deep research and pattern discovery
+context: fork
+allowed-tools: Read, Grep, Glob
+---
+```
+
+### Why Fork a Skill?
+
+Research-heavy skills that read many files can pollute your main context with tool call traces. Forking keeps main context clean while still having access to conversation history.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  WITHOUT FORK                    WITH FORK                   │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  Main context sees:              Main context sees:          │
+│  • 30 file reads                 • Clean summary             │
+│  • 15 grep results               • Key findings only         │
+│  • All intermediate steps        • (~500 tokens)             │
+│  • (~15K tokens consumed)                                    │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Fork vs Subagent
+
+| Aspect | Subagent | `context: fork` |
+|--------|----------|------------------|
+| Starting context | Empty | Full conversation |
+| Use when | Parallel specialized work | Context-aware analysis |
+
+**Key insight**: Use fork when the skill needs to "know" the conversation history but shouldn't pollute it with execution traces.
+
+→ **Deep dive**: See [Module 08: Forked Context](../context-management/08-forked-context.md) for implementation patterns and examples.
+
+---
+
 ## Summary
 
 | Concept | Key Takeaway |
@@ -261,9 +390,13 @@ description: "Use this for files"  # No clear trigger
 | **Location** | `.claude/skills/<name>/SKILL.md` |
 | **Description** | Critical for discovery (~100 tokens) |
 | **vs Commands** | Skills = knowledge, Commands = workflows |
+| **Forked Context** | Isolate heavy analysis with `context: fork` |
+| **Hot-Reload** | Edit skills without restarting (2.1.0+) |
+| **user-invocable** | Control slash menu visibility (2.1.0+) |
+| **agent field** | Specify executing agent type (2.1.0+) |
 
 ---
 
 ## Next Module
 
-Continue to [04-settings.md](./04-settings.md) to master configuration.
+Continue to [04-settings.md](../configuration/04-settings.md) to master configuration.

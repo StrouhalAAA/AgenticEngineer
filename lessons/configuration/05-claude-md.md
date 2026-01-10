@@ -218,4 +218,4 @@ Before finalizing:
 
 ## Next Module
 
-Continue to [06-agents.md](./06-agents.md) to learn subagent orchestration.
+Continue to [06-hooks.md](./06-hooks.md) to learn event-driven automation.

@@ -1,6 +1,22 @@
 # Feature Planning
 
-Create a new plan in specs/*.md to implement the `Feature` using the exact specified markdown `Plan Format`. Follow the `Instructions` to create the plan use the `Relevant Files` to focus on the right files.
+> **Analyze feature requests and generate implementation plans with clean context isolation.**
+
+---
+description: Analyze feature request and generate implementation plan
+argument-hint: <feature-description>
+context: fork
+allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git diff:*)
+---
+
+Create a new plan in specs/*.md to implement the `Feature` using the exact specified markdown `Plan Format`. Follow the `Instructions` to create the plan and use the `Relevant Files` to focus on the right files.
+
+## Why Forked Context?
+
+This command uses `context: fork` to:
+- Research the codebase extensively without polluting your main conversation
+- Read multiple files, analyze patterns, check git history
+- Return only the clean implementation plan to your main context
 
 ## Instructions
 
@@ -15,6 +31,25 @@ Create a new plan in specs/*.md to implement the `Feature` using the exact speci
 - If you need a new library, use `uv add` and be sure to report it in the `Notes` section of the `Plan Format`.
 - Respect requested files in the `Relevant Files` section.
 - Start your research by reading the `README.md` file.
+
+## Analysis Process (Forked Context)
+
+Before generating the plan, perform these analyses in isolation:
+
+### 1. Codebase Pattern Discovery
+- Find related components using Glob
+- Analyze existing patterns with Read
+- Check recent changes with git log
+
+### 2. Dependency Analysis
+- Which modules will this touch?
+- What existing APIs can we leverage?
+- Are there shared utilities that apply?
+
+### 3. Risk Assessment
+- External dependencies
+- Breaking change potential
+- Performance considerations
 
 ## Relevant Files
 
@@ -83,6 +118,10 @@ Execute every command to validate the feature works correctly with zero regressi
 
 <list commands you'll use to validate with 100% confidence the feature is implemented correctly with zero regressions. every command must execute without errors so be specific about what you want to run to validate the feature works as expected. Include commands to test the feature end-to-end.>
 - `cd app/server && uv run pytest` - Run server tests to validate the feature works with zero regressions
+
+## Complexity Assessment
+**Estimated Complexity**: Simple | Medium | Complex
+**Confidence Level**: High | Medium | Low
 
 ## Notes
 <optionally list any additional notes, future considerations, or context that are relevant to the feature that will be helpful to the developer>

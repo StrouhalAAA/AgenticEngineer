@@ -147,6 +147,60 @@ Research → Design → Implement → Test → Review
 
 ---
 
+## Subagents vs Forked Context
+
+Claude Code 2.1.0 introduced `context: fork`—a different isolation strategy. Understanding when to use each is critical:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 ISOLATION STRATEGIES                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  SUBAGENT                        FORKED CONTEXT              │
+│  ────────                        ──────────────              │
+│                                                              │
+│  Starts with empty context       Inherits full conversation  │
+│  "Fresh specialist"              "Informed assistant"        │
+│                                                              │
+│  Cannot see session history      Sees everything you said    │
+│  "What project?"                 "I know the PRD we discussed"│
+│                                                              │
+│  Use for parallel tasks          Use for context-aware tasks │
+│  that don't need history         that shouldn't pollute      │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Decision Matrix
+
+| Scenario | Use Subagent | Use `context: fork` |
+|----------|--------------|---------------------|
+| Codebase exploration | ✅ Doesn't need history | |
+| Session summary for notes | | ✅ Needs to see conversation |
+| Parallel security audit | ✅ Independent analysis | |
+| PRD validation against code | | ✅ Must know the PRD |
+| Research similar patterns | ✅ Fresh perspective | |
+| Deep code review | | ✅ Context-aware feedback |
+
+### Syntax Comparison
+
+**Subagent** (via Task tool):
+```
+Claude spawns automatically when delegating complex tasks
+```
+
+**Forked Context** (in frontmatter):
+```yaml
+---
+description: Deep analysis that needs conversation context
+context: fork
+---
+```
+
+→ **Deep dive**: See [Module 08: Forked Context](./08-forked-context.md) for implementation patterns.
+
+---
+
 ## Hands-On Exercises
 
 ### Exercise 6.1: Use Built-In Explore Agent
@@ -201,11 +255,12 @@ Research → Design → Implement → Test → Review
 | **Explore** | Fast, read-only codebase analysis |
 | **Plan** | Research for planning decisions |
 | **General-Purpose** | Complex multi-step tasks |
-| **Custom Agents** | `.claude/agents/<name>.md` |
+| **Custom Agents** | `.claude/agents/<n>.md` |
 | **Tools** | Match to role (read-only vs. full) |
+| **vs Fork** | Subagents start empty; fork inherits context |
 
 ---
 
 ## Next Module
 
-Continue to [07-hooks.md](./07-hooks.md) to learn automated triggers.
+Continue to [08-forked-context.md](./08-forked-context.md) to master history-aware isolation.

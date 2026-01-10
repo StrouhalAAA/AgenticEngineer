@@ -316,6 +316,71 @@ team-marketplace/
 
 ## LSP Plugin Configuration
 
+> Native LSP support was introduced in **Claude Code v2.0.74**, providing IDE-like code intelligence.
+
+### Prerequisites: Enable LSP Tools
+
+Before installing any LSP plugins, enable the LSP tools feature:
+
+```bash
+# Add to your shell profile (.bashrc, .zshrc, or equivalent)
+export ENABLE_LSP_TOOLS=1
+
+# Apply the change
+source ~/.zshrc  # or restart terminal
+```
+
+### Complete Setup by Language
+
+**TypeScript/JavaScript:**
+```bash
+# 1. Install plugin
+/plugin install typescript-lsp@claude-plugins-official
+
+# 2. Install language server binary
+npm install -g @vtsls/language-server typescript
+
+# 3. Restart Claude Code
+claude
+```
+
+**Python:**
+```bash
+# 1. Install plugin
+/plugin install pyright-lsp@claude-plugins-official
+
+# 2. Install language server binary
+pip install pyright
+
+# 3. Restart Claude Code
+claude
+```
+
+**Go:**
+```bash
+# Install language server
+go install golang.org/x/tools/gopls@latest
+```
+
+**Rust:**
+```bash
+# Install language server
+rustup component add rust-analyzer
+```
+
+### Verify LSP is Working
+
+```bash
+# 1. Check plugin installed
+/plugin  # Navigate to "Installed" tab
+
+# 2. Verify binary in PATH
+which pyright  # or vtsls, gopls, rust-analyzer
+
+# 3. Test with a query (add "use LSP" to be explicit)
+> Find all references to handleSubmit using LSP
+```
+
 ### .lsp.json Template
 
 ```json
@@ -355,6 +420,26 @@ team-marketplace/
   }
 }
 ```
+
+### LSP Operations Reference
+
+| Operation | Description | Prompt Example |
+|-----------|-------------|----------------|
+| `goToDefinition` | Jump to symbol definition | "Where is processRequest defined? Use LSP" |
+| `findReferences` | Find all usages | "Find all references to displayError using LSP" |
+| `hover` | Get type info, params, docs | "What parameters does handleSubmit accept? Use LSP" |
+| `documentSymbol` | List all symbols in file | "Show me all symbols in backend/index.js using LSP" |
+| `workspaceSymbol` | Search symbols project-wide | "Find all methods containing innerHTML" |
+| Diagnostics | Real-time errors/warnings | Automatic after every edit |
+
+### Troubleshooting LSP
+
+| Issue | Solution |
+|-------|----------|
+| "No LSP server available" | Check binary in PATH: `which pyright` |
+| Plugin not loading | Restart Claude Code after installation |
+| Not using LSP | Add "use LSP" to your prompt explicitly |
+| No visual confirmation | LSP has no status indicator — test with a query |
 
 ---
 
@@ -504,8 +589,8 @@ tools:
 
 ## Related Documentation
 
-- [Lesson: Plugins](../lessons/09-plugins.md) - Core concepts
-- [Lesson: Commands](../lessons/02-commands.md) - Command syntax
-- [Lesson: Agents](../lessons/06-subagents.md) - Agent definitions
-- [Lesson: Skills](../lessons/03-skills.md) - Skill structure
-- [Lesson: Hooks](../lessons/07-hooks.md) - Hook configuration
+- [Lesson: Plugins](../lessons/extensibility/10-plugins.md) - Core concepts
+- [Lesson: Commands](../lessons/foundations/02-commands.md) - Command syntax
+- [Lesson: Agents](../lessons/context-management/07-subagents.md) - Agent definitions
+- [Lesson: Skills](../lessons/foundations/03-skills.md) - Skill structure
+- [Lesson: Hooks](../lessons/configuration/06-hooks.md) - Hook configuration

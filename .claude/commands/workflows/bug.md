@@ -11,7 +11,6 @@ Create a new plan in specs/*.md to resolve the `Bug` using the exact specified m
 - IMPORTANT: Replace every <placeholder> in the `Plan Format` with the requested value. Add as much detail as needed to fix the bug.
 - Use your reasoning model: THINK HARD about the bug, its root cause, and the steps to fix it properly.
 - IMPORTANT: Be surgical with your bug fix, solve the bug at hand and don't fall off track.
-- IMPORTANT: We want the minimal number of changes that will fix and address the bug.
 - Don't use decorators. Keep it simple.
 - If you need a new library, use `uv add` and be sure to report it in the `Notes` section of the `Plan Format`.
 - Respect requested files in the `Relevant Files` section.
