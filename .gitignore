@@ -1,0 +1,12 @@
+# Local overrides
+.claude/settings.local.json
+CLAUDE.local.md
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+
+# Dependencies
+node_modules/
