@@ -54,6 +54,27 @@
 - [Exercises](exercises/) - Hands-on practice
 - [Agentic Coding](agentic-coding/) - Advanced team training
 
+## Customize Your Experience
+
+**Output Styles** control how Claude responds — from ultra-concise to detailed explanations.
+
+| Style | Best For |
+|-------|----------|
+| `concise` | Quick tasks, minimal chatter |
+| `explanatory` | Learning, understanding decisions |
+| `verbose` | Complex debugging, detailed analysis |
+
+Change styles anytime:
+```bash
+# In session
+/output-style concise
+
+# Or via CLI
+claude --output-style explanatory
+```
+
+Create custom styles in `.claude/output-styles/` — see [Output Styles Guide](reference/output-styles/creating-styles.md).
+
 ## Using This Repo
 
 ```bash
