@@ -1,6 +1,6 @@
 # Learning Path
 
-> Master Claude Code in ~3 hours through 10 structured lessons.
+> Master Claude Code in ~3.5 hours through 11 structured lessons.
 
 ---
 
@@ -41,14 +41,15 @@ See [Context Management Overview](context-management/README.md) for decision gui
 
 ---
 
-## Extensibility (Lessons 9-10)
+## Extensibility (Lessons 9-11)
 
-Connect external tools and share configurations.
+Connect external tools, share configurations, and enable code intelligence.
 
 | Lesson | Topic | Time | Prereqs |
 |--------|-------|------|---------|
 | [09-mcp](extensibility/09-mcp.md) | Model Context Protocol | 20 min | 01 |
 | [10-plugins](extensibility/10-plugins.md) | Bundle & distribute | 25 min | 02, 03 |
+| [11-lsp](extensibility/11-lsp.md) | Language Server Protocol | 20 min | 10 |
 
 ---
 
@@ -66,3 +67,4 @@ Connect external tools and share configurations.
 | Use forked context | [08-forked-context](context-management/08-forked-context.md) |
 | Connect external tools | [09-mcp](extensibility/09-mcp.md) |
 | Share team configurations | [10-plugins](extensibility/10-plugins.md) |
+| Enable IDE-like code intelligence | [11-lsp](extensibility/11-lsp.md) |

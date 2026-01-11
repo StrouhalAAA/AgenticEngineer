@@ -276,6 +276,8 @@ which pyright  # or vtsls, gopls, etc.
 2. **Binary required separately** — Plugin alone isn't enough
 3. **Check PATH** — If "No LSP server available", run `which pyright` to verify
 
+> 📖 **Deep dive**: For comprehensive LSP coverage including all operations, prompt patterns, and troubleshooting, see [Module 11: LSP](./11-lsp.md).
+
 ---
 
 ## Creating Your Own Plugin

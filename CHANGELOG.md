@@ -4,6 +4,7 @@ All notable changes to this repository.
 
 | Date | Version | Priority | Changes |
 |------|---------|----------|---------|
+| 2026-01-11 | 2.4.0 | ⭐ | Added Module 11: LSP (Language Server Protocol) |
 | 2026-01-10 | 2.3.0 | | Added team notification system |
 | 2025-01-10 | 2.2.0 | | Reorganized lessons into thematic sections |
 | 2025-01-10 | 2.1.0 | | Added Forked Context, enhanced `/feature` command |
@@ -11,6 +12,37 @@ All notable changes to this repository.
 | 2025-01-10 | 1.0.0 | | Initial release with fundamentals |
 
 > **Priority column**: Updates marked with ⭐ contain important changes your team should review.
+
+---
+
+## [2.4.0] - 2026-01-11
+
+### Added
+- **Module 11: LSP** (`lessons/extensibility/11-lsp.md`)
+  - Dedicated lesson for Language Server Protocol support (Claude Code v2.0.74+)
+  - Complete setup guide: env var, plugin, binary, verification
+  - All 5 LSP operations explained with use cases
+  - Prompt patterns for triggering LSP explicitly
+  - Supported languages table (TypeScript, Python, Go, Rust, etc.)
+  - `.lsp.json` configuration templates
+  - Troubleshooting guide with debug checklist
+  - 3 hands-on exercises
+  - Team action items and success metrics
+
+### Changed
+- **Enhanced `lessons/extensibility/10-plugins.md`** with expanded LSP section
+  - Added required `ENABLE_LSP_TOOLS=1` env var step
+  - Added "When to use LSP vs Regular Search" decision table
+  - Added prompt tips and limitations
+  - Cross-reference to new Module 11
+- **Updated `lessons/README.md`** - Now 11 lessons (~3.5 hours)
+- **Updated `reference/plugins/examples.md`** with complete LSP setup by language
+- **Updated `learn/claude-code/changelog/CHANGELOG_INDEX.md`** with v2.0.74 LSP note
+
+### Why This Matters
+LSP transforms Claude Code from text pattern matching to semantic code understanding.
+The critical setup step (`ENABLE_LSP_TOOLS=1`) is often missed — this lesson ensures
+your team configures LSP correctly from day one.
 
 ---
 
