@@ -15,6 +15,7 @@ Educational repository for mastering Claude Code.
 | [Release Notes](learn/claude-code/release-notes/) | Version tracking |
 | [Agentic Coding](agentic-coding/) | Advanced TAD training |
 | [Exercises](exercises/) | Hands-on practice |
+| [Visual Guide](https://miro.com/app/board/uXjVJkcGGBM=/?share_link_id=403387313656) | Presentation & visualisation |
 
 ## What's New in 2.1.0
 
