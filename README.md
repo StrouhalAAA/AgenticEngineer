@@ -12,7 +12,7 @@ Educational repository for mastering Claude Code.
 |-------------|---|
 | [Lessons](lessons/) | 10 core modules |
 | [Reference](reference/) | Skills, Subagents, Hooks, Settings |
-| [Changelog](learn/claude-code/changelog/) | Version tracking |
+| [Release Notes](learn/claude-code/release-notes/) | Version tracking |
 | [Agentic Coding](agentic-coding/) | Advanced TAD training |
 | [Exercises](exercises/) | Hands-on practice |
 
@@ -24,7 +24,7 @@ Educational repository for mastering Claude Code.
 - **Wildcard permissions** — Pre-approve command families
 - **MCP `list_changed`** — Dynamic tool updates
 
-[Full changelog →](learn/claude-code/changelog/2026-01-07-v2.1.0.md)
+[Full release notes →](learn/claude-code/release-notes/2026-01-07-v2.1.0.md)
 
 ---
 

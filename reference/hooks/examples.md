@@ -329,4 +329,4 @@ exit 0
 ## Related
 
 - [06-hooks.md](../../lessons/configuration/06-hooks.md) — Hooks lesson with exercises
-- [Changelog 2.1.0](../../learn/claude-code/changelog/2026-01-07-v2.1.0.md) — Full 2.1.0 features
+- [Release Notes 2.1.0](../../learn/claude-code/release-notes/2026-01-07-v2.1.0.md) — Full 2.1.0 features

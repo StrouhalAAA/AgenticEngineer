@@ -1,6 +1,6 @@
-# Claude Code Changelog Index
+# Claude Code Release Notes
 
-> Summary of tracked Claude Code versions and key changes.
+> Summary of tracked Claude Code versions, features, and key changes.
 
 ---
 
@@ -98,7 +98,7 @@
 
 ## How to Update This Index
 
-When adding new changelog entries:
+When adding new release notes:
 
 1. Create version file: `YYYY-MM-DD-vX.X.X.md`
 2. Update "Latest Version" section

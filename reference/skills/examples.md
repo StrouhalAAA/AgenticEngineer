@@ -217,4 +217,4 @@ Skills use two-phase loading to save tokens:
 
 - [03-skills.md](../../lessons/foundations/03-skills.md) — Skills lesson
 - [08-forked-context.md](../../lessons/context-management/08-forked-context.md) — Forked execution
-- [Changelog 2.1.0](../../learn/claude-code/changelog/2026-01-07-v2.1.0.md) — Full features
+- [Release Notes 2.1.0](../../learn/claude-code/release-notes/2026-01-07-v2.1.0.md) — Full features

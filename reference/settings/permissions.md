@@ -251,4 +251,4 @@ See [settings.json.example](./settings.json.example) for a complete template.
 ## Related
 
 - [06-hooks.md](../../lessons/configuration/06-hooks.md) — Hooks for automation
-- [Changelog 2.1.0](../../learn/claude-code/changelog/2026-01-07-v2.1.0.md) — Full feature list
+- [Release Notes 2.1.0](../../learn/claude-code/release-notes/2026-01-07-v2.1.0.md) — Full feature list

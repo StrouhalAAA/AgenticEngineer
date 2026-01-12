@@ -137,7 +137,7 @@ Teams can now achieve significant productivity gains through parallel workflows 
   - Cross-reference to new Module 11
 - **Updated `lessons/README.md`** - Now 11 lessons (~3.5 hours)
 - **Updated `reference/plugins/examples.md`** with complete LSP setup by language
-- **Updated `learn/claude-code/changelog/CHANGELOG_INDEX.md`** with v2.0.74 LSP note
+- **Updated `learn/claude-code/release-notes/INDEX.md`** with v2.0.74 LSP note
 
 ### Why This Matters
 LSP transforms Claude Code from text pattern matching to semantic code understanding.
