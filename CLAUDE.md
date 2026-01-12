@@ -3,18 +3,21 @@
 ## Purpose
 Educational repository teaching Claude Code fundamentals to development teams.
 
-> 🆕 **Updated for Claude Code 2.1.0** — January 2026
+> 🆕 **Updated for Claude Code 2.1.x** — January 2026
 
 ## Structure
 - `START_HERE.md` - Begin here
-- `lessons/` - 10 core lessons in 4 sections
+- `lessons/` - Core lessons in 4 sections
   - `foundations/` - Core concepts, commands, skills (01-03)
-  - `configuration/` - Settings, CLAUDE.md, hooks (04-06)
+  - `configuration/` - Settings, terminal, model, statusline, CLAUDE.md, hooks (04-06)
   - `context-management/` - Subagents, forked context (07-08)
-  - `extensibility/` - MCP, plugins (09-10)
-- `reference/` - Quick lookup for skills, subagents, hooks, settings
+  - `extensibility/` - MCP, plugins, LSP (09-11)
+- `reference/` - Quick lookup
+  - `expert-patterns/` - Parallel sessions, lean memory
+  - `skills/`, `subagents/`, `hooks/`, `settings/`, `plugins/`
 - `learn/claude-code/changelog/` - Version tracking
 - `agentic-coding/` - Advanced TAD training
+- `team-template/` - Copy-paste team configurations
 - `exercises/` - Hands-on practice
 
 ## Commands
@@ -25,7 +28,22 @@ Educational repository teaching Claude Code fundamentals to development teams.
 
 ## Key Concepts
 
-### Context Isolation (2.1.0)
+### Model Configuration
+- **opusplan** - Recommended default: Opus for planning, Sonnet for execution
+- **Model aliases**: `sonnet`, `opus`, `haiku`, `opusplan`
+- Configure in settings.json: `"model": "opusplan"`
+
+### Terminal Optimization
+- Enable iTerm2 notifications for parallel sessions
+- Configure status line for model/cost visibility
+- Use Shift+Enter for multi-line prompts
+
+### Lean Memory Principle
+- Keep CLAUDE.md under 100 lines (~2.5k tokens)
+- Use `@path/to/file.md` imports for details
+- Update when Claude makes mistakes
+
+### Context Isolation
 Three strategies for managing context:
 1. **Main context** - Default, everything visible
 2. **Subagents** - Start empty, parallel specialized work
@@ -33,28 +51,23 @@ Three strategies for managing context:
 
 See `lessons/context-management/` for deep dive.
 
-### Skills Hot-Reload (2.1.0)
-Skills now activate immediately without session restart. Edit `.claude/skills/*/SKILL.md` and test instantly.
+## What's New in 2.1.x
 
-### Agent-Scoped Hooks (2.1.0)
-Define PreToolUse, PostToolUse, and Stop hooks in agent/skill frontmatter. Hooks only fire during that agent's lifecycle.
-
-### Wildcard Permissions (2.1.0)
-Pre-approve command families: `Bash(npm *)`, `Bash(git *)`. Configure in `.claude/settings.json`.
-
-## What's New in 2.1.0
-
-| Feature | Impact |
+| Feature | Lesson |
 |---------|--------|
-| Skills hot-reload | No restart to test skill changes |
-| `context: fork` | Isolated execution with history |
-| Agent-scoped hooks | Per-agent automation |
-| `once: true` hooks | Single execution per session |
-| Wildcard permissions | Pre-approve command families |
-| MCP `list_changed` | Dynamic tool updates |
-| `/teleport` | Cross-machine session resume |
+| Model aliases (opusplan) | [04b-model-config](lessons/configuration/04b-model-config.md) |
+| Status line configuration | [04c-statusline](lessons/configuration/04c-statusline.md) |
+| @import syntax in CLAUDE.md | [05-claude-md](lessons/configuration/05-claude-md.md) |
+| Skills hot-reload | [03-skills](lessons/foundations/03-skills.md) |
+| Agent-scoped hooks | [06-hooks](lessons/configuration/06-hooks.md) |
+| `context: fork` | [08-forked-context](lessons/context-management/08-forked-context.md) |
 
-See `learn/claude-code/changelog/2026-01-07-v2.1.0.md` for full details.
+## Expert Patterns
+
+| Pattern | Reference |
+|---------|-----------|
+| Run 5+ parallel sessions | [parallel-sessions.md](reference/expert-patterns/parallel-sessions.md) |
+| Keep CLAUDE.md lean | [lean-memory.md](reference/expert-patterns/lean-memory.md) |
 
 ## Navigation
-Start with START_HERE.md, follow lessons 1-10, then explore reference/ as needed.
+Start with START_HERE.md, follow lessons 1-11, explore reference/ and expert patterns as needed.

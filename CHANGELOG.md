@@ -4,6 +4,7 @@ All notable changes to this repository.
 
 | Date | Version | Priority | Changes |
 |------|---------|----------|---------|
+| 2026-01-11 | 2.5.0 | ⭐ | Added Terminal, Model, Status Line lessons + Expert Patterns |
 | 2026-01-11 | 2.4.0 | ⭐ | Added Module 11: LSP (Language Server Protocol) |
 | 2026-01-10 | 2.3.0 | | Added team notification system |
 | 2025-01-10 | 2.2.0 | | Reorganized lessons into thematic sections |
@@ -12,6 +13,105 @@ All notable changes to this repository.
 | 2025-01-10 | 1.0.0 | | Initial release with fundamentals |
 
 > **Priority column**: Updates marked with ⭐ contain important changes your team should review.
+
+---
+
+## [2.5.0] - 2026-01-11
+
+### Added
+
+**New Configuration Lessons:**
+- **Module 04a: Terminal Configuration** (`lessons/configuration/04a-terminal-config.md`)
+  - iTerm2 system notifications setup
+  - Parallel session workflow (5+ sessions)
+  - Line break configuration (Shift+Enter, Option+Enter)
+  - Vim mode support
+  - Handling large inputs
+
+- **Module 04b: Model Configuration** (`lessons/configuration/04b-model-config.md`)
+  - Model aliases (sonnet, opus, haiku, opusplan)
+  - The `opusplan` strategy (Opus planning + Sonnet execution)
+  - Extended context with `[1m]` suffix
+  - Subagent model configuration
+  - Cost-aware workflows
+
+- **Module 04c: Status Line Configuration** (`lessons/configuration/04c-statusline.md`)
+  - JSON input structure from Claude Code
+  - Example scripts (bash, Python, Node)
+  - Git-aware status line
+  - Cost tracking display
+  - Team standardization
+
+**Expert Patterns:**
+- **Parallel Sessions** (`reference/expert-patterns/parallel-sessions.md`)
+  - Running 5+ concurrent Claude sessions
+  - Session handoff with --teleport
+  - Plan Mode first strategy
+  - Inline bash in commands
+  - Subagents for common tasks
+  - Stop hooks for verification
+  - Autonomous loop patterns
+
+- **Lean Memory** (`reference/expert-patterns/lean-memory.md`)
+  - Keep CLAUDE.md under 100 lines (~2.5k tokens)
+  - Token impact analysis
+  - @import syntax patterns
+  - Mistake → Memory workflow
+  - Team CLAUDE.md management
+  - What NOT to include
+
+**Team Resources:**
+- **Team Status Line Script** (`team-template/.claude/statusline.sh`)
+  - Shows model, directory, git branch, cost, lines changed
+  - ANSI color support
+  - Ready to copy to projects
+
+### Changed
+- **Enhanced Module 05: CLAUDE.md** (`lessons/configuration/05-claude-md.md`)
+  - Added `@import` syntax documentation
+  - Added lean memory principle (100 line target)
+  - Added mistake→memory workflow
+  - Added import path types (relative, absolute, home)
+  - Updated template with imports
+  - Added checklist with import considerations
+
+- **Updated `reference/settings/settings.json.example`**
+  - Added `"model": "opusplan"` default
+  - Added `statusLine` configuration
+  - Added PostToolUse formatter hook
+  - Added PreToolUse test hook
+
+- **Updated `lessons/README.md`**
+  - Added new lessons 04a, 04b, 04c to learning path
+  - Added expert patterns section
+  - Added learning tracks (Quick Start, Power User, Full Course)
+  - Updated total time to ~4.5 hours
+
+- **Updated `START_HERE.md`**
+  - Added new lessons to table
+  - Added learning tracks section
+  - Added expert patterns quick links
+
+- **Updated `team-template/README.md`**
+  - Added statusline.sh documentation
+  - Added full project structure reference
+  - Added troubleshooting section
+
+- **Updated root `CLAUDE.md`**
+  - Added new lessons to structure
+  - Added model configuration summary
+  - Added terminal optimization summary
+  - Added lean memory principle summary
+
+### Why This Matters
+
+These additions address the most common questions from teams adopting Claude Code:
+1. **"How do I run multiple sessions?"** → Terminal config + parallel sessions pattern
+2. **"Which model should I use?"** → Model config with opusplan recommendation
+3. **"My CLAUDE.md is too long"** → Lean memory pattern with imports
+4. **"How do I know which session needs me?"** → Status line + notifications
+
+Teams can now achieve significant productivity gains through parallel workflows and optimized context management.
 
 ---
 

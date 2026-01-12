@@ -6,6 +6,8 @@
 
 | Date | Change | Link |
 |------|--------|------|
+| 2026-01-11 | Added Terminal, Model, Status Line lessons | [Learning Path](lessons/README.md) |
+| 2026-01-11 | Added Expert Patterns (Parallel Sessions, Lean Memory) | [Expert Patterns](reference/expert-patterns/) |
 | 2025-01-10 | Reorganized lessons into thematic sections | [Learning Path](lessons/README.md) |
 | 2025-01-10 | Added Forked Context module | [08-forked-context](lessons/context-management/08-forked-context.md) |
 | 2025-01-10 | Added TAD fundamentals | [TAD-01](agentic-coding/TAD-01-fundamentals.md) |
@@ -28,6 +30,9 @@
 | # | Lesson | Time | What You'll Learn |
 |---|--------|------|-------------------|
 | 4 | [Settings](lessons/configuration/04-settings.md) | 10 min | Configure permissions |
+| 4a | [Terminal Config](lessons/configuration/04a-terminal-config.md) | 15 min | Notifications, parallel sessions |
+| 4b | [Model Config](lessons/configuration/04b-model-config.md) | 15 min | Model selection (opusplan) |
+| 4c | [Status Line](lessons/configuration/04c-statusline.md) | 15 min | Custom status display |
 | 5 | [CLAUDE.md](lessons/configuration/05-claude-md.md) | 15 min | Project context files |
 | 6 | [Hooks](lessons/configuration/06-hooks.md) | 15 min | Automate with triggers |
 
@@ -38,21 +43,47 @@
 | 7 | [Subagents](lessons/context-management/07-subagents.md) | 20 min | Delegate to specialists |
 | 8 | [Forked Context](lessons/context-management/08-forked-context.md) | 25 min | History-aware isolation |
 
-### Extensibility (Lessons 9-10)
+### Extensibility (Lessons 9-11)
 
 | # | Lesson | Time | What You'll Learn |
 |---|--------|------|-------------------|
 | 9 | [MCP](lessons/extensibility/09-mcp.md) | 20 min | Connect external tools |
 | 10 | [Plugins](lessons/extensibility/10-plugins.md) | 25 min | Bundle & share team setups |
+| 11 | [LSP](lessons/extensibility/11-lsp.md) | 20 min | Code intelligence |
 
-**Total time**: ~3 hours
+**Total time**: ~4.5 hours
+
+## Learning Tracks
+
+### Track 1: Quick Start (1 hour)
+For developers who want to get productive fast:
+- 01-core-concepts → 04-settings → 05-claude-md → 02-commands
+
+### Track 2: Power User (2 hours)
+For developers already familiar with basics:
+- 04a-terminal-config → 04b-model-config → 04c-statusline
+- 07-subagents → 08-forked-context → Expert Patterns
+
+### Track 3: Full Course (4.5 hours)
+Complete all lessons in order.
 
 ## Quick Links
 
-- [Learning Path Overview](lessons/README.md) - Thematic lesson navigation
-- [Reference Docs](reference/) - Look up syntax and examples
-- [Exercises](exercises/) - Hands-on practice
-- [Agentic Coding](agentic-coding/) - Advanced team training
+- [Learning Path Overview](lessons/README.md) — Thematic lesson navigation
+- [Reference Docs](reference/) — Look up syntax and examples
+- [Expert Patterns](reference/expert-patterns/) — Parallel sessions, lean memory
+- [Exercises](exercises/) — Hands-on practice
+- [Agentic Coding](agentic-coding/) — Advanced team training
+- [Team Template](team-template/) — Copy-paste configurations
+
+## Expert Patterns
+
+After completing the core lessons:
+
+| Pattern | What You'll Learn |
+|---------|-------------------|
+| [Parallel Sessions](reference/expert-patterns/parallel-sessions.md) | Run 5+ Claude sessions, notifications, handoffs |
+| [Lean Memory](reference/expert-patterns/lean-memory.md) | Keep CLAUDE.md under 100 lines, imports |
 
 ## Customize Your Experience
 
