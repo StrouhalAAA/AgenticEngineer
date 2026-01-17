@@ -67,6 +67,11 @@ For developers already familiar with basics:
 ### Track 3: Full Course (4.5 hours)
 Complete all lessons in order.
 
+### Track 4: Command Design (1.5 hours)
+For developers building parameterized commands:
+- 02-commands → 03-skills → [TAD-02: Command Design](agentic-coding/TAD-02-command-design.md)
+- Practice with [ACBS Example Commands](.claude/commands/examples/acbs/)
+
 ## Quick Links
 
 - [Learning Path Overview](lessons/README.md) — Thematic lesson navigation

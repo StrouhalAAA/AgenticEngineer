@@ -1,0 +1,1665 @@
+# ============================================
+# ACBS PROJECT REFERENCE
+# For AI Agent Consumption
+# Version: 1.0.0
+# Generated: 2026-01-17
+# ============================================
+
+meta:
+  name: "ACBS - Aures Core Business Systems"
+  description: "Enterprise automotive CRM & sales management monorepo for Czech/Slovak car dealership chain"
+  scale:
+    frontend_products: 10
+    backend_services: 56
+    database_schemas: 16
+    cronjobs: 8
+  primary_domain: "Automotive CRM & Sales"
+  repository_type: "Monorepo"
+  company: "Aures Holdings (AAA Auto Group)"
+  markets: ["CZ", "SK"]
+
+# ============================================
+# BUSINESS DOMAINS
+# ============================================
+domains:
+  customer:
+    name: "Customer Management"
+    description: "Leads, contacts, persons, companies, customer data management"
+    services:
+      - LeadService
+      - CommentService
+    frontend:
+      - CRM
+    db_schemas:
+      - client
+    keywords:
+      - lead
+      - customer
+      - person
+      - company
+      - contact
+      - phone
+      - address
+      - client
+
+  vehicle:
+    name: "Vehicle & Inventory"
+    description: "Stock management, vehicle data, pricing, buying rules, ERP integration"
+    services:
+      - VehicleService
+      - StockListService
+      - StocklistBff
+      - StocklistRepository
+      - StocklistErpImporter
+      - StocklistRabbitImporter
+      - ErpVehicle
+      - AuresVehicleBuyingRulesService
+      - CarLifeService
+      - TiresService
+    frontend:
+      - StockGuideAdmin
+      - CRM
+    db_schemas:
+      - interest
+      - ruleAVB
+    keywords:
+      - vehicle
+      - car
+      - stock
+      - inventory
+      - pricing
+      - buying rules
+      - AVB
+      - stocklist
+
+  sales:
+    name: "Sales Process"
+    description: "Buy/sell interests, appointments, callbacks, deals, carts"
+    services:
+      - InterestService
+      - DealService
+      - TinderService
+      - CalendarService
+      - AppointmentStateJob
+    frontend:
+      - CRM
+      - kiosek
+    db_schemas:
+      - interest
+      - Deal
+    keywords:
+      - interest
+      - deal
+      - appointment
+      - callback
+      - cart
+      - buy
+      - sell
+      - calendar
+
+  financial:
+    name: "Financial Operations"
+    description: "Commissions, claims, financing, invoicing, payments"
+    services:
+      - CommissionService
+      - ClaimService
+      - FniService
+    frontend:
+      - FNI
+      - new-fni-app
+    db_schemas:
+      - commission
+      - claim
+      - Deal
+      - FIG
+    keywords:
+      - commission
+      - claim
+      - financing
+      - FNI
+      - invoice
+      - payment
+      - compensation
+
+  document:
+    name: "Document & Media Management"
+    description: "Photos, documents, scanning, OCR, 360-degree images"
+    services:
+      - DocumentCenter5G
+      - DocumentScan
+      - FotocentrumService5G
+      - Foto360_5G
+      - FotoOcrService
+      - PhotoSender5G
+    frontend:
+      - fotocentrum
+      - DocumentScan
+    db_schemas: []
+    keywords:
+      - document
+      - photo
+      - image
+      - scan
+      - OCR
+      - 360
+      - attachment
+      - file
+
+  communication:
+    name: "Communication Services"
+    description: "Cisco telephony, SMS, email, notifications, real-time messaging"
+    services:
+      - CommunicationCenterService
+      - CiscoService
+      - CiscoEventsService
+      - SignalRService
+      - NaviSmsConverterService
+    frontend:
+      - phones
+    db_schemas:
+      - cisco
+      - commCenter
+    keywords:
+      - phone
+      - call
+      - SMS
+      - email
+      - notification
+      - cisco
+      - communication
+      - signalr
+
+  auth:
+    name: "Authentication & Security"
+    description: "Azure AD, LDAP, identity management, authorization"
+    services:
+      - AzureAuth
+      - IdentityService
+      - LDAPService
+      - LdapWsoService
+      - IISAuthService
+      - GlobalSec
+    frontend:
+      - TestAuthWSO
+    db_schemas:
+      - gdpr
+    keywords:
+      - auth
+      - authentication
+      - identity
+      - LDAP
+      - Azure AD
+      - security
+      - permission
+      - role
+      - login
+
+  settings:
+    name: "Settings & Configuration"
+    description: "System settings, dictionaries, enumerations, localization"
+    services:
+      - SettingsService
+      - DictionaryService
+      - EnumerationService
+      - EnumerationData
+    frontend: []
+    db_schemas:
+      - setting
+      - Dict
+      - dict2
+      - Enum
+      - enum2
+    keywords:
+      - settings
+      - configuration
+      - dictionary
+      - enumeration
+      - localization
+      - i18n
+
+  reporting:
+    name: "Reporting & Analytics"
+    description: "Reports, questionnaires, history, analytics"
+    services:
+      - ReportingService
+      - HistoryService
+      - HistoryRepository
+      - QuestionnaireService
+    frontend:
+      - CRM
+    db_schemas:
+      - reporting
+    keywords:
+      - report
+      - analytics
+      - history
+      - questionnaire
+      - dashboard
+      - metrics
+
+  integration:
+    name: "External Integration"
+    description: "Navision ERP, Cebia, external APIs, data sync"
+    services:
+      - NavisionService
+      - CebiaApp
+      - CrmOldConnectorService
+      - MapService
+      - BlacklistService
+    frontend:
+      - CebiaApp
+    db_schemas: []
+    keywords:
+      - Navision
+      - ERP
+      - Cebia
+      - integration
+      - sync
+      - external
+      - API
+
+# ============================================
+# FRONTEND PRODUCTS
+# ============================================
+frontend:
+  CRM:
+    purpose: "Main CRM for sales team, call center, customer management, vehicle dashboard"
+    tech_stack:
+      - vue3
+      - typescript
+      - vite
+      - pinia
+      - tailwind
+      - primevue
+    domains:
+      - customer
+      - vehicle
+      - sales
+      - communication
+      - reporting
+    path: "Frontend/CRM"
+    package_name: "crm5g"
+    status: "active"
+
+  FNI:
+    purpose: "Financial product management, financing applications, legacy Vue 2"
+    tech_stack:
+      - vue2
+      - vuex
+      - vue-cli
+      - bootstrap
+      - bootstrap-vue
+    domains:
+      - financial
+    path: "Frontend/FNI"
+    package_name: "aaa-frontend"
+    status: "legacy"
+
+  new-fni-app:
+    purpose: "New FNI application, modern replacement for legacy FNI"
+    tech_stack:
+      - vue3
+      - typescript
+      - vite
+    domains:
+      - financial
+    path: "Frontend/new-fni-app"
+    status: "development"
+
+  phones:
+    purpose: "Phone system management, Cisco integration, call center operations"
+    tech_stack:
+      - vue2
+      - vuex
+    domains:
+      - communication
+    path: "Frontend/phones"
+    status: "active"
+
+  kiosek:
+    purpose: "Customer-facing kiosk application for self-service operations"
+    tech_stack:
+      - vue3
+      - typescript
+    domains:
+      - sales
+      - customer
+    path: "Frontend/kiosek"
+    status: "active"
+
+  fotocentrum:
+    purpose: "Photo and media management interface for vehicle documentation"
+    tech_stack:
+      - vue2
+    domains:
+      - document
+    path: "Frontend/fotocentrum"
+    status: "active"
+
+  StockGuideAdmin:
+    purpose: "Stock management and vehicle buying rules administration"
+    tech_stack:
+      - vue2
+    domains:
+      - vehicle
+    path: "Frontend/StockGuideAdmin"
+    status: "active"
+
+  DocumentScan:
+    purpose: "Document scanning interface for digitizing paperwork"
+    tech_stack:
+      - vue3
+    domains:
+      - document
+    path: "Frontend/DocumentScan"
+    status: "active"
+
+  CebiaApp:
+    purpose: "Cebia integration frontend for vehicle history checks"
+    tech_stack:
+      - vue2
+    domains:
+      - integration
+      - vehicle
+    path: "Frontend/CebiaApp"
+    status: "active"
+
+  vue-component-library:
+    purpose: "Shared Vue component library for consistent UI across apps"
+    tech_stack:
+      - vue3
+      - typescript
+    domains: []
+    path: "Frontend/vue-component-library"
+    status: "active"
+    type: "library"
+
+# ============================================
+# BACKEND SERVICES
+# ============================================
+services:
+  # Customer Domain
+  LeadService:
+    domain: customer
+    purpose: "Lead management, tracking, qualification"
+    integrations:
+      - InterestService
+      - EnumerationService
+      - CommunicationCenterService
+    path: "Backend/LeadService"
+    type: "api"
+
+  CommentService:
+    domain: customer
+    purpose: "Comments and notes management for customers and deals"
+    integrations:
+      - EnumerationService
+    path: "Backend/CommentService"
+    type: "api"
+
+  # Vehicle Domain
+  VehicleService:
+    domain: vehicle
+    purpose: "Vehicle data management, specifications, state tracking"
+    integrations:
+      - EnumerationService
+      - StockListService
+    path: "Backend/VehicleService"
+    type: "api"
+
+  StockListService:
+    domain: vehicle
+    purpose: "Stock inventory management, vehicle availability"
+    integrations:
+      - VehicleService
+      - EnumerationService
+    path: "Backend/StockListService"
+    type: "api"
+
+  StocklistBff:
+    domain: vehicle
+    purpose: "Backend-for-frontend for stock operations"
+    integrations:
+      - StockListService
+      - VehicleService
+    path: "Backend/StocklistBff"
+    type: "bff"
+
+  StocklistRepository:
+    domain: vehicle
+    purpose: "Data access layer for stocklist"
+    integrations: []
+    path: "Backend/StocklistRepository"
+    type: "repository"
+
+  StocklistErpImporter:
+    domain: vehicle
+    purpose: "ERP data import for stocklist"
+    integrations:
+      - NavisionService
+    path: "Backend/StocklistErpImporter"
+    type: "importer"
+
+  StocklistRabbitImporter:
+    domain: vehicle
+    purpose: "RabbitMQ message handler for stocklist updates"
+    integrations:
+      - StockListService
+    path: "Backend/StocklistRabbitImporter"
+    type: "importer"
+
+  ErpVehicle:
+    domain: vehicle
+    purpose: "ERP integration for vehicle data"
+    integrations:
+      - NavisionService
+    path: "Backend/ErpVehicle"
+    type: "integration"
+
+  AuresVehicleBuyingRulesService:
+    domain: vehicle
+    purpose: "Vehicle buying rules engine, whitelist/blacklist management"
+    integrations:
+      - EnumerationService
+    path: "Backend/AuresVehicleBuyingRulesService"
+    type: "api"
+
+  CarLifeService:
+    domain: vehicle
+    purpose: "Vehicle lifecycle tracking"
+    integrations: []
+    path: "Backend/CarLifeService"
+    type: "api"
+
+  TiresService:
+    domain: vehicle
+    purpose: "Tire management for vehicles"
+    integrations: []
+    path: "Backend/TiresService"
+    type: "api"
+
+  # Sales Domain
+  InterestService:
+    domain: sales
+    purpose: "Buy/sell interest management, appointments, callbacks, carts"
+    integrations:
+      - LeadService
+      - EnumerationService
+      - VehicleService
+      - CommunicationCenterService
+    path: "Backend/InterestService"
+    type: "api"
+
+  DealService:
+    domain: sales
+    purpose: "Deal management, contracts, sales process"
+    integrations:
+      - InterestService
+      - CommissionService
+      - NavisionService
+    path: "Backend/DealService"
+    type: "api"
+
+  TinderService:
+    domain: sales
+    purpose: "Vehicle matching/recommendation service"
+    integrations:
+      - VehicleService
+      - InterestService
+    path: "Backend/TinderService"
+    type: "api"
+
+  CalendarService:
+    domain: sales
+    purpose: "Calendar and scheduling management"
+    integrations:
+      - InterestService
+    path: "Backend/CalendarService"
+    type: "api"
+
+  # Financial Domain
+  CommissionService:
+    domain: financial
+    purpose: "Commission calculation and management"
+    integrations:
+      - DealService
+      - EnumerationService
+    path: "Backend/CommissionService"
+    type: "api"
+
+  ClaimService:
+    domain: financial
+    purpose: "Claims processing, compensation tracking"
+    integrations:
+      - DealService
+    path: "Backend/ClaimService"
+    type: "api"
+
+  FniService:
+    domain: financial
+    purpose: "Financial products, financing applications"
+    integrations:
+      - InterestService
+      - DealService
+    path: "Backend/FniService"
+    type: "api"
+
+  # Document Domain
+  DocumentCenter5G:
+    domain: document
+    purpose: "Central document management and storage"
+    integrations:
+      - EnumerationService
+    path: "Backend/DocumentCenter5G"
+    type: "api"
+
+  DocumentScan:
+    domain: document
+    purpose: "Document scanning backend service"
+    integrations:
+      - DocumentCenter5G
+    path: "Backend/DocumentScan"
+    type: "api"
+
+  FotocentrumService5G:
+    domain: document
+    purpose: "Photo center service for vehicle images"
+    integrations:
+      - DocumentCenter5G
+    path: "Backend/FotocentrumService5G"
+    type: "api"
+
+  Foto360_5G:
+    domain: document
+    purpose: "360-degree vehicle photography service"
+    integrations:
+      - FotocentrumService5G
+    path: "Backend/Foto360_5G"
+    type: "api"
+
+  FotoOcrService:
+    domain: document
+    purpose: "OCR processing for document images"
+    integrations:
+      - DocumentCenter5G
+    path: "Backend/FotoOcrService"
+    type: "api"
+
+  PhotoSender5G:
+    domain: document
+    purpose: "Photo distribution service"
+    integrations:
+      - FotocentrumService5G
+    path: "Backend/PhotoSender5G"
+    type: "api"
+
+  # Communication Domain
+  CommunicationCenterService:
+    domain: communication
+    purpose: "Central communication hub - SMS, email, notifications"
+    integrations:
+      - EnumerationService
+      - SignalRService
+    path: "Backend/CommunicationCenterService"
+    type: "api"
+
+  CiscoService:
+    domain: communication
+    purpose: "Cisco telephony integration"
+    integrations:
+      - CiscoEventsService
+    path: "Backend/CiscoService"
+    type: "integration"
+
+  CiscoEventsService:
+    domain: communication
+    purpose: "Cisco event handling and processing"
+    integrations:
+      - CommunicationCenterService
+    path: "Backend/CiscoEventsService"
+    type: "integration"
+
+  SignalRService:
+    domain: communication
+    purpose: "Real-time messaging via SignalR"
+    integrations: []
+    path: "Backend/SignalRService"
+    type: "infrastructure"
+
+  NaviSmsConverterService:
+    domain: communication
+    purpose: "SMS conversion for Navision integration"
+    integrations:
+      - NavisionService
+      - CommunicationCenterService
+    path: "Backend/NaviSmsConverterService"
+    type: "integration"
+
+  NonSalesCalls:
+    domain: communication
+    purpose: "Non-sales call tracking"
+    integrations:
+      - CiscoService
+    path: "Backend/NonSalesCalls"
+    type: "api"
+
+  NonSalesCallsRepository:
+    domain: communication
+    purpose: "Data access for non-sales calls"
+    integrations: []
+    path: "Backend/NonSalesCallsRepository"
+    type: "repository"
+
+  PhonesBff:
+    domain: communication
+    purpose: "Backend-for-frontend for phones app"
+    integrations:
+      - CiscoService
+      - CommunicationCenterService
+    path: "Backend/PhonesBff"
+    type: "bff"
+
+  PhonesRepository:
+    domain: communication
+    purpose: "Data access layer for phones"
+    integrations: []
+    path: "Backend/PhonesRepository"
+    type: "repository"
+
+  # Auth Domain
+  AzureAuth:
+    domain: auth
+    purpose: "Azure AD authentication integration"
+    integrations:
+      - IdentityService
+    path: "Backend/AzureAuth"
+    type: "auth"
+
+  IdentityService:
+    domain: auth
+    purpose: "Identity and user management"
+    integrations:
+      - LDAPService
+    path: "Backend/IdentityService"
+    type: "auth"
+
+  LDAPService:
+    domain: auth
+    purpose: "LDAP directory integration"
+    integrations: []
+    path: "Backend/LDAPService"
+    type: "auth"
+
+  LdapWsoService:
+    domain: auth
+    purpose: "LDAP WSO integration service"
+    integrations:
+      - LDAPService
+    path: "Backend/LdapWsoService"
+    type: "auth"
+
+  IISAuthService:
+    domain: auth
+    purpose: "IIS authentication service"
+    integrations: []
+    path: "Backend/IISAuthService"
+    type: "auth"
+
+  GlobalSec:
+    domain: auth
+    purpose: "Global security service"
+    integrations:
+      - IdentityService
+    path: "Backend/GlobalSec"
+    type: "auth"
+
+  # Settings Domain
+  SettingsService:
+    domain: settings
+    purpose: "System settings management"
+    integrations: []
+    path: "Backend/SettingsService"
+    type: "api"
+
+  DictionaryService:
+    domain: settings
+    purpose: "Dictionary and localization data"
+    integrations: []
+    path: "Backend/DictionaryService"
+    type: "api"
+
+  EnumerationService:
+    domain: settings
+    purpose: "Enumeration data management"
+    integrations:
+      - EnumerationData
+    path: "Backend/EnumerationService"
+    type: "api"
+
+  EnumerationData:
+    domain: settings
+    purpose: "Enumeration data storage"
+    integrations: []
+    path: "Backend/EnumerationData"
+    type: "data"
+
+  EnumerationImport:
+    domain: settings
+    purpose: "Enumeration data import utility"
+    integrations:
+      - EnumerationService
+    path: "Backend/EnumerationImport"
+    type: "utility"
+
+  EnumerationLDAPSyncJob:
+    domain: settings
+    purpose: "LDAP synchronization for enumerations"
+    integrations:
+      - LDAPService
+      - EnumerationService
+    path: "Backend/EnumerationLDAPSyncJob"
+    type: "job"
+
+  EnumerationNaviSyncApp:
+    domain: settings
+    purpose: "Navision synchronization for enumerations"
+    integrations:
+      - NavisionService
+      - EnumerationService
+    path: "Backend/EnumerationNaviSyncApp"
+    type: "job"
+
+  # Reporting Domain
+  ReportingService:
+    domain: reporting
+    purpose: "Report generation and management"
+    integrations:
+      - EnumerationService
+    path: "Backend/ReportingService"
+    type: "api"
+
+  HistoryService:
+    domain: reporting
+    purpose: "Historical data access service"
+    integrations:
+      - HistoryRepository
+    path: "Backend/HistoryService"
+    type: "api"
+
+  HistoryRepository:
+    domain: reporting
+    purpose: "Data access layer for history"
+    integrations: []
+    path: "Backend/HistoryRepository"
+    type: "repository"
+
+  QuestionnaireService:
+    domain: reporting
+    purpose: "Questionnaire management and processing"
+    integrations:
+      - EnumerationService
+    path: "Backend/QuestionnaireService"
+    type: "api"
+
+  # Integration Domain
+  NavisionService:
+    domain: integration
+    purpose: "Navision ERP integration service"
+    integrations: []
+    path: "Backend/NavisionService"
+    type: "integration"
+
+  CebiaApp:
+    domain: integration
+    purpose: "Cebia vehicle history check integration"
+    integrations:
+      - VehicleService
+    path: "Backend/CebiaApp"
+    type: "integration"
+
+  CrmOldConnectorService:
+    domain: integration
+    purpose: "Legacy CRM system connector"
+    integrations: []
+    path: "Backend/CrmOldConnectorService"
+    type: "integration"
+
+  MapService:
+    domain: integration
+    purpose: "Map and location services"
+    integrations: []
+    path: "Backend/MapService"
+    type: "api"
+
+  BlacklistService:
+    domain: integration
+    purpose: "Blacklist management for customers/vehicles"
+    integrations:
+      - EnumerationService
+    path: "Backend/BlacklistService"
+    type: "api"
+
+  # Infrastructure Services
+  CrmBff:
+    domain: sales
+    purpose: "Backend-for-frontend for CRM application"
+    integrations:
+      - InterestService
+      - LeadService
+      - VehicleService
+    path: "Backend/CrmBff"
+    type: "bff"
+
+  HangfireService:
+    domain: settings
+    purpose: "Background job processing with Hangfire"
+    integrations: []
+    path: "Backend/HangfireService"
+    type: "infrastructure"
+
+  HealthCheck:
+    domain: settings
+    purpose: "Health check endpoints for all services"
+    integrations: []
+    path: "Backend/HealthCheck"
+    type: "infrastructure"
+
+  KiosekService:
+    domain: sales
+    purpose: "Kiosk backend service"
+    integrations:
+      - InterestService
+    path: "Backend/KiosekService"
+    type: "api"
+
+  KiosekRepository:
+    domain: sales
+    purpose: "Data access layer for kiosk"
+    integrations: []
+    path: "Backend/KiosekRepository"
+    type: "repository"
+
+  ReceptionRepository:
+    domain: sales
+    purpose: "Data access layer for reception"
+    integrations: []
+    path: "Backend/ReceptionRepository"
+    type: "repository"
+
+  ReceptionService:
+    domain: sales
+    purpose: "Reception management service"
+    integrations:
+      - InterestService
+    path: "Backend/ReceptionService"
+    type: "api"
+
+  StgWebApi:
+    domain: vehicle
+    purpose: "Stock guide web API"
+    integrations:
+      - StockListService
+    path: "Backend/StgWebApi"
+    type: "api"
+
+  Shared:
+    domain: settings
+    purpose: "Shared libraries and common code"
+    integrations: []
+    path: "Backend/Shared"
+    type: "library"
+
+# ============================================
+# CRON JOBS
+# ============================================
+cronjobs:
+  AppointmentStateJob:
+    domain: sales
+    purpose: "Updates appointment states based on time"
+    path: "Backend/AppointmentStateJob"
+    schedule: "periodic"
+
+  CloseCallbacksJob:
+    domain: sales
+    purpose: "Closes expired callbacks"
+    path: "Backend/CloseCallbacksJob"
+    schedule: "periodic"
+
+  CronJobCloseCarts:
+    domain: sales
+    purpose: "Closes abandoned shopping carts"
+    path: "Backend/CronJobCloseCarts"
+    schedule: "periodic"
+
+  CronJobSendDocumentSMS:
+    domain: document
+    purpose: "Sends SMS notifications for documents"
+    path: "Backend/CronJobSendDocumentSMS"
+    schedule: "periodic"
+
+  DataAnonymizationJob:
+    domain: auth
+    purpose: "GDPR data anonymization"
+    path: "Backend/DataAnonymizationJob"
+    schedule: "periodic"
+
+  CronJobCallbackAI:
+    domain: sales
+    purpose: "AI-powered callback processing"
+    path: "CronJobs/CronJobCallbackAI"
+    schedule: "periodic"
+
+  CronJobFniSendDocuments:
+    domain: financial
+    purpose: "Sends FNI documents"
+    path: "CronJobs/CronJobFniSendDocuments"
+    schedule: "periodic"
+
+  CronJobFotocentrumService:
+    domain: document
+    purpose: "Photo center background processing"
+    path: "CronJobs/CronJobFotocentrumService"
+    schedule: "periodic"
+
+  CronJobGetResultsFromInsightSofa:
+    domain: reporting
+    purpose: "Retrieves results from InsightSofa"
+    path: "CronJobs/CronJobGetResultsFromInsightSofa"
+    schedule: "periodic"
+
+  CronJobImportToInsightSofa:
+    domain: reporting
+    purpose: "Imports data to InsightSofa"
+    path: "CronJobs/CronJobImportToInsightSofa"
+    schedule: "periodic"
+
+  CronJobSendDepositSms:
+    domain: sales
+    purpose: "Sends deposit SMS notifications"
+    path: "CronJobs/CronJobSendDepositSms"
+    schedule: "periodic"
+
+  SyncUsersLdap2ERP:
+    domain: auth
+    purpose: "Synchronizes users from LDAP to ERP"
+    path: "CronJobs/SyncUsersLdap2ERP"
+    schedule: "periodic"
+
+# ============================================
+# DATABASE SCHEMAS
+# ============================================
+database:
+  client:
+    domain: customer
+    purpose: "Customer, person, company, contact data"
+    key_tables:
+      - Customer
+      - Person
+      - Company
+      - Address
+      - Phone
+      - OtherContact
+      - PersonPhone
+    path: "DB/client"
+
+  interest:
+    domain: sales
+    purpose: "Buy/sell interests, appointments, callbacks, carts, capacity"
+    key_tables:
+      - InterestBuy
+      - InterestSell
+      - Appointment
+      - CallBack
+      - Cart
+      - CallBackRule
+      - BuyAppointment
+      - SellAppointment
+      - CapacityPlanner
+      - CarToBuyPricing
+    path: "DB/interest"
+
+  Deal:
+    domain: sales
+    purpose: "Deals, contracts, invoices"
+    key_tables:
+      - Deal
+      - Invoice
+      - Contract
+    path: "DB/Deal"
+
+  commission:
+    domain: financial
+    purpose: "Commission calculations and rules"
+    key_tables:
+      - Commission
+      - CommissionRule
+    path: "DB/commission"
+
+  claim:
+    domain: financial
+    purpose: "Claims and compensation tracking"
+    key_tables:
+      - Claim
+      - CompensationCash
+    path: "DB/claim"
+
+  FIG:
+    domain: financial
+    purpose: "Financial insurance group data"
+    key_tables: []
+    path: "DB/FIG"
+
+  cisco:
+    domain: communication
+    purpose: "Cisco telephony integration data"
+    key_tables:
+      - IncomingCallNotification
+      - CallRecord
+    path: "DB/cisco"
+
+  commCenter:
+    domain: communication
+    purpose: "Communication center - SMS, email, notifications"
+    key_tables:
+      - BannedPhone
+      - Email
+      - Sms
+      - Notification
+    path: "DB/commCenter"
+
+  comment:
+    domain: customer
+    purpose: "Comments and notes"
+    key_tables:
+      - Comment
+    path: "DB/comment"
+
+  setting:
+    domain: settings
+    purpose: "System settings and configuration"
+    key_tables:
+      - Setting
+      - UserPreference
+    path: "DB/setting"
+
+  Dict:
+    domain: settings
+    purpose: "Dictionary and localization (primary)"
+    key_tables:
+      - Dictionary
+      - Translation
+    path: "DB/Dict"
+
+  dict2:
+    domain: settings
+    purpose: "Dictionary data (secondary)"
+    key_tables: []
+    path: "DB/dict2"
+
+  Enum:
+    domain: settings
+    purpose: "Enumeration data (primary)"
+    key_tables:
+      - Enumeration
+      - EnumerationValue
+    path: "DB/Enum"
+
+  enum2:
+    domain: settings
+    purpose: "Enumeration data (secondary)"
+    key_tables: []
+    path: "DB/enum2"
+
+  gdpr:
+    domain: auth
+    purpose: "GDPR compliance and consent tracking"
+    key_tables:
+      - Request
+      - PhoneAgreement
+      - OtherContactAgreement
+      - Consent
+    path: "DB/gdpr"
+
+  ruleAVB:
+    domain: vehicle
+    purpose: "Vehicle buying rules (whitelist/blacklist)"
+    key_tables:
+      - Rule
+      - RuleCondition
+      - RuleActivation
+    path: "DB/ruleAVB"
+
+  reporting:
+    domain: reporting
+    purpose: "Reporting and analytics data"
+    key_tables:
+      - Report
+      - ReportDefinition
+    path: "DB/reporting"
+
+  global:
+    domain: settings
+    purpose: "Global shared data"
+    key_tables: []
+    path: "DB/global"
+
+  custom:
+    domain: settings
+    purpose: "Custom extensions and scripts"
+    key_tables: []
+    path: "DB/custom"
+
+# ============================================
+# REPOSITORY STRUCTURE
+# ============================================
+structure:
+  Frontend:
+    pattern: "Frontend/{ProductName}/"
+    description: "Vue.js applications"
+    subdirs:
+      - src/components
+      - src/composables
+      - src/services
+      - src/stores
+      - src/views
+      - src/types
+      - src/router
+      - public
+
+  Backend:
+    pattern: "Backend/{ServiceName}/"
+    description: ".NET microservices"
+    subdirs:
+      - Controllers
+      - Models/Db
+      - Models/Dto
+      - Services
+      - Repositories
+      - Helpers
+      - Middleware
+
+  DB:
+    pattern: "DB/{SchemaName}/"
+    description: "SQL Server database scripts"
+    subdirs:
+      - TABLE
+      - PROCEDURE
+      - FUNCTION
+      - TRIGGER
+
+  CronJobs:
+    pattern: "CronJobs/{JobName}/"
+    description: "Scheduled background jobs"
+
+  Tools:
+    pattern: "Tools/{ToolName}/"
+    description: "Utility tools and helpers"
+
+  Enumerations:
+    pattern: "Enumerations/"
+    description: "Enumeration data files (JSON/XML)"
+
+  ProductSpec:
+    pattern: "ProductSpec/"
+    description: "Product specifications and PRDs"
+    subdirs:
+      - analysis
+      - bugs
+      - templates
+
+  claude:
+    path: ".claude/"
+    description: "AI configuration, commands, agents"
+    subdirs:
+      - commands
+      - guidelines
+      - architecture
+      - docs
+      - hooks
+
+# ============================================
+# TECH STACK
+# ============================================
+tech_stack:
+  frontend:
+    modern:
+      - vue3
+      - vite
+      - typescript
+      - pinia
+      - tailwind
+      - primevue
+      - cypress
+    legacy:
+      - vue2
+      - vue-cli
+      - vuex
+      - bootstrap
+      - bootstrap-vue
+      - buefy
+
+  backend:
+    framework: "dotnet8"
+    language: "csharp"
+    orm: "entity-framework-core"
+    api: "aspnet-core"
+    documentation: "swagger-openapi"
+    testing: "nunit"
+    containerization: "docker"
+
+  database:
+    engine: "sql-server"
+    orm: "entity-framework-core"
+    procedures: "t-sql"
+    pattern: "FX2-procedures"
+
+  messaging:
+    broker: "rabbitmq"
+    realtime: "signalr"
+    patterns:
+      - command
+      - event
+      - query
+
+  jobs:
+    scheduler: "hangfire"
+    cron: "custom-cronjobs"
+
+  devops:
+    ci_cd: "azure-devops"
+    vcs: "git"
+    artifacts: "azure-artifacts"
+    pipelines: "yaml-pipelines"
+
+  authentication:
+    providers:
+      - azure-ad
+      - ldap
+      - windows-negotiate
+    protocols:
+      - oauth2
+      - jwt
+
+# ============================================
+# DESIGN HINTS FOR AGENTS
+# ============================================
+agent_design:
+  # Valid variable values for commands
+  vocabulary:
+    domain:
+      - customer
+      - vehicle
+      - sales
+      - financial
+      - document
+      - communication
+      - auth
+      - settings
+      - reporting
+      - integration
+    product:
+      - CRM
+      - FNI
+      - phones
+      - kiosek
+      - fotocentrum
+      - StockGuideAdmin
+      - DocumentScan
+      - CebiaApp
+      - new-fni-app
+      - vue-component-library
+    layer:
+      - frontend
+      - backend
+      - db
+      - cronjob
+    environment:
+      - dev
+      - test
+      - pp
+      - prod
+    service_type:
+      - api
+      - bff
+      - repository
+      - integration
+      - auth
+      - infrastructure
+      - job
+      - library
+
+  # How to resolve domain to components
+  resolution_patterns:
+    customer:
+      backend:
+        - LeadService
+        - CommentService
+      frontend:
+        - CRM
+      db:
+        - client
+        - comment
+
+    vehicle:
+      backend:
+        - VehicleService
+        - StockListService
+        - StocklistBff
+        - AuresVehicleBuyingRulesService
+        - ErpVehicle
+        - CarLifeService
+        - TiresService
+      frontend:
+        - StockGuideAdmin
+        - CRM
+      db:
+        - interest
+        - ruleAVB
+
+    sales:
+      backend:
+        - InterestService
+        - DealService
+        - CalendarService
+        - KiosekService
+        - CrmBff
+        - TinderService
+      frontend:
+        - CRM
+        - kiosek
+      db:
+        - interest
+        - Deal
+
+    financial:
+      backend:
+        - CommissionService
+        - ClaimService
+        - FniService
+      frontend:
+        - FNI
+        - new-fni-app
+      db:
+        - commission
+        - claim
+        - Deal
+        - FIG
+
+    document:
+      backend:
+        - DocumentCenter5G
+        - DocumentScan
+        - FotocentrumService5G
+        - Foto360_5G
+        - FotoOcrService
+        - PhotoSender5G
+      frontend:
+        - fotocentrum
+        - DocumentScan
+      db: []
+
+    communication:
+      backend:
+        - CommunicationCenterService
+        - CiscoService
+        - CiscoEventsService
+        - SignalRService
+        - PhonesBff
+        - NaviSmsConverterService
+      frontend:
+        - phones
+      db:
+        - cisco
+        - commCenter
+
+    auth:
+      backend:
+        - AzureAuth
+        - IdentityService
+        - LDAPService
+        - LdapWsoService
+        - IISAuthService
+        - GlobalSec
+      frontend:
+        - TestAuthWSO
+      db:
+        - gdpr
+
+    settings:
+      backend:
+        - SettingsService
+        - DictionaryService
+        - EnumerationService
+        - HangfireService
+      frontend: []
+      db:
+        - setting
+        - Dict
+        - dict2
+        - Enum
+        - enum2
+        - global
+
+    reporting:
+      backend:
+        - ReportingService
+        - HistoryService
+        - QuestionnaireService
+      frontend:
+        - CRM
+      db:
+        - reporting
+
+    integration:
+      backend:
+        - NavisionService
+        - CebiaApp
+        - CrmOldConnectorService
+        - MapService
+        - BlacklistService
+      frontend:
+        - CebiaApp
+      db: []
+
+  # Example command patterns
+  command_examples:
+    - pattern: "/audit <domain>"
+      description: "Audit all services in a domain"
+      example: "/audit customer"
+      resolves_to: "audits LeadService, CommentService"
+      path_resolution:
+        - "Backend/LeadService"
+        - "Backend/CommentService"
+        - "Frontend/CRM"
+        - "DB/client"
+
+    - pattern: "/analyze <product> <layer>"
+      description: "Analyze specific product layer"
+      example: "/analyze CRM frontend"
+      resolves_to: "analyzes Frontend/CRM code"
+      path_resolution:
+        - "Frontend/CRM/src"
+
+    - pattern: "/build <product>"
+      description: "Build specific product"
+      example: "/build CRM"
+      resolves_to: "npm run build in Frontend/CRM"
+      commands:
+        - "cd Frontend/CRM && npm run build"
+
+    - pattern: "/test <service>"
+      description: "Run tests for a service"
+      example: "/test InterestService"
+      resolves_to: "runs NUnit tests"
+      commands:
+        - "dotnet test Backend/InterestService/InterestService.sln"
+
+    - pattern: "/read-task <task-id>"
+      description: "Read Azure DevOps task details"
+      example: "/read-task 67340"
+      resolves_to: "fetches task from Azure DevOps"
+
+    - pattern: "/prd <task-id>"
+      description: "Generate PRD from Azure DevOps task"
+      example: "/prd 67340"
+      resolves_to: "creates PRD in ProductSpec/analysis/"
+
+    - pattern: "/deployment-comment <task-id>"
+      description: "Add deployment comment to task"
+      example: "/deployment-comment 67340"
+      resolves_to: "adds formatted comment to Azure DevOps"
+
+    - pattern: "/fe-validator"
+      description: "Validate frontend code"
+      example: "/fe-validator"
+      resolves_to: "runs format, lint, typecheck"
+      commands:
+        - "npm run format"
+        - "npm run lint:check"
+        - "npm run typecheck"
+
+    - pattern: "/audit-service <service>"
+      description: "Audit service endpoints vs Swagger"
+      example: "/audit-service InterestService"
+      resolves_to: "compares code usage with Swagger spec"
+
+  # Path resolution rules
+  path_rules:
+    frontend_service:
+      pattern: "Frontend/{product}/src/services/{ServiceName}Service.ts"
+      example: "Frontend/CRM/src/services/InterestService.ts"
+
+    frontend_composable:
+      pattern: "Frontend/{product}/src/composables/use{Feature}.ts"
+      example: "Frontend/CRM/src/composables/useEnumeration.ts"
+
+    frontend_store:
+      pattern: "Frontend/{product}/src/stores/{domain}.ts"
+      example: "Frontend/CRM/src/stores/client.ts"
+
+    frontend_component:
+      pattern: "Frontend/{product}/src/components/{domain}/{ComponentName}.vue"
+      example: "Frontend/CRM/src/components/customer/CustomerForm.vue"
+
+    frontend_page:
+      pattern: "Frontend/{product}/src/pages/{domain}/{PageName}.vue"
+      example: "Frontend/CRM/src/pages/vehicleRules/Dashboard.vue"
+
+    backend_controller:
+      pattern: "Backend/{ServiceName}/{ServiceName}/Controllers/{EntityName}Controller.cs"
+      example: "Backend/InterestService/InterestService/Controllers/InterestController.cs"
+
+    backend_service:
+      pattern: "Backend/{ServiceName}/{ServiceName}/Services/{EntityName}Service.cs"
+      example: "Backend/InterestService/InterestService/Services/AppointmentService.cs"
+
+    backend_repository:
+      pattern: "Backend/{ServiceName}/{ServiceName}/Repositories/{EntityName}Repository.cs"
+      example: "Backend/InterestService/InterestService/Repositories/CallbackRepository.cs"
+
+    backend_dto:
+      pattern: "Backend/{ServiceName}/{ServiceName}/Models/Dto/{DtoName}.cs"
+      example: "Backend/InterestService/InterestService/Models/Dto/AppointmentDto.cs"
+
+    db_table:
+      pattern: "DB/{schema}/TABLE/{TableName}.sql"
+      example: "DB/interest/TABLE/Appointment.sql"
+
+    db_procedure:
+      pattern: "DB/{schema}/PROCEDURE/{ProcedureName}.sql"
+      example: "DB/interest/PROCEDURE/GetAppointmentAll_FX2.sql"
+
+  # Common search patterns for agents
+  search_patterns:
+    find_api_endpoint:
+      description: "Find API endpoint implementation"
+      patterns:
+        - "grep -r 'Route.*{endpoint}' Backend/"
+        - "grep -r 'HttpGet.*{endpoint}' Backend/"
+        - "grep -r 'HttpPost.*{endpoint}' Backend/"
+
+    find_frontend_usage:
+      description: "Find frontend service usage"
+      patterns:
+        - "grep -r '{serviceName}' Frontend/CRM/src/"
+        - "grep -r 'use{Feature}' Frontend/CRM/src/"
+
+    find_db_table:
+      description: "Find database table definition"
+      patterns:
+        - "ls DB/*/TABLE/{tableName}.sql"
+        - "grep -r 'CREATE TABLE.*{tableName}' DB/"
+
+    find_enumeration:
+      description: "Find enumeration usage"
+      patterns:
+        - "grep -r '{enumName}' Frontend/CRM/src/"
+        - "grep -r '{enumName}' Backend/"
+        - "grep -r '{enumName}' Enumerations/"
+
+# ============================================
+# API CONVENTIONS
+# ============================================
+api_conventions:
+  base_urls:
+    dev:
+      pattern: "https://{service}.api.dev.aures.app"
+      examples:
+        - "https://interest.api.dev.aures.app"
+        - "https://settings.api.dev.aures.app"
+        - "https://auresvehiclebuyingrules.api.dev.aures.app"
+    test:
+      pattern: "https://{service}.api.test.aures.app"
+    pp:
+      pattern: "https://{service}.api.pp.aures.app"
+    prod:
+      pattern: "https://{service}.api.aures.app"
+
+  swagger:
+    pattern: "{base_url}/swagger/v1/swagger.json"
+    example: "https://interest.api.dev.aures.app/swagger/v1/swagger.json"
+
+  authentication:
+    local_token: "https://ldap.api.dev.aures.app/api/v1/Token/GetFromNegotiate"
+    method: "Windows Negotiate"
+    header: "Authorization: Bearer {token}"
+
+  common_ports:
+    InterestService: 44357
+    SettingsService: 44358
+    EnumerationService: 44359
+
+# ============================================
+# DEVELOPMENT COMMANDS
+# ============================================
+development_commands:
+  frontend:
+    install: "cd Frontend/{product} && npm install"
+    dev: "cd Frontend/{product} && npm run dev"
+    build: "cd Frontend/{product} && npm run build"
+    lint: "cd Frontend/{product} && npm run lint"
+    format: "cd Frontend/{product} && npm run format"
+    typecheck: "cd Frontend/{product} && npm run typecheck"
+    test_e2e: "cd Frontend/{product} && npm run test:e2e"
+
+  backend:
+    build: "bash ./.claude/commands/atomic/be-utils.sh build_service_solution Backend/{ServiceName}/{ServiceName}.sln {ServiceName}"
+    run: "dotnet run --project Backend/{ServiceName}/{ServiceName}/{ServiceName}.csproj"
+    test: "dotnet test Backend/{ServiceName}/{ServiceName}.sln"
+
+  azure_devops:
+    read_task: "/read-task {task-id}"
+    read_parent: "/read-task {task-id} parent"
+    add_comment: 'bash ./.claude/commands/atomic/az-devops.sh task_add_comment {task-id} "{comment}"'
+    get_title: "bash ./.claude/commands/atomic/az-devops.sh task_get_title {task-id}"
+
+  git:
+    branch_naming: "feat/JST/{issue}-{description}"
+    branch_naming_fix: "fix/JST/{issue}-{description}"
+    commit_format: |
+      [type]: #{task-id} - Brief English summary
+
+      - Detailed point about what was changed
+      - Another specific change made
+
+      AI osobni asistent
