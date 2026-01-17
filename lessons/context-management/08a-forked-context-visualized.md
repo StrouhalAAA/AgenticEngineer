@@ -4,6 +4,223 @@
 
 ---
 
+## Table of Contents
+
+1. [Quick Start: Using Forked Context](#quick-start-using-forked-context) ← Start here
+2. [Real-World Example: Service Refactoring](#real-world-example-service-refactoring)
+3. [The Core Problem: Context Bloat](#the-core-problem-context-bloat)
+4. [The Solution: Forked Context](#the-solution-forked-context)
+5. [Side-by-Side Comparison](#side-by-side-comparison)
+6. [Three Context Strategies Compared](#three-context-strategies-compared)
+7. [Decision Guide: When to Fork](#decision-guide-when-to-fork)
+8. [Key Takeaways](#key-takeaways)
+
+---
+
+## Quick Start: Using Forked Context
+
+### For Command Authors (Developers, Tech Leads)
+
+Add `context: fork` to any command's frontmatter to isolate heavy research work:
+
+```yaml
+---
+description: Map all dependencies of a service
+context: fork
+allowed-tools: Read, Grep, Glob
+---
+
+Analyze the service named $ARGUMENTS and produce a dependency map.
+Read all relevant files, trace consumers, and return a structured summary.
+```
+
+**What happens:**
+- The command inherits your full conversation history
+- It can read dozens of files without bloating your main context
+- Only the final summary returns to your session
+
+### For Subagent Definitions (Platform Engineers)
+
+In `.claude/agents/your-agent.md`:
+
+```yaml
+---
+name: dependency-mapper
+description: Maps service dependencies across the codebase
+context: fork
+allowed-tools: Read, Grep, Glob, WebFetch
+model: sonnet
+---
+
+You are a dependency analysis specialist. Given a service name,
+thoroughly explore all consumers, database dependencies, and events.
+Return a structured markdown report.
+```
+
+### For Product Managers
+
+When requesting research tasks, ask for **forked context** when you need:
+- Codebase analysis → single summary document
+- Dependency mapping → architecture overview
+- Impact assessment → change proposal
+
+**Example prompt:**
+> "Use a forked context command to analyze the payment flow and give me a summary of all the services involved."
+
+This keeps the conversation lean so you can have a longer discussion afterward.
+
+---
+
+## Real-World Example: Service Refactoring
+
+### Scenario
+
+You're refactoring `IdentityService` into microservices and need to map all dependencies before writing any code.
+
+### The Research Phase (Forked)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│    /map-service-dependencies IdentityService                                │
+│                                                                             │
+│    ┌─────────────────────────────────────────────────────────────────────┐  │
+│    │                        FORKED CONTEXT                               │  │
+│    │                                                                     │  │
+│    │  Step 1: Find the service                                          │  │
+│    │  ────────────────────────────                                      │  │
+│    │  📁 GLOB: **/IdentityService.ts                                    │  │
+│    │  📄 READ: Main service file (1,247 lines)                          │  │
+│    │                                                                     │  │
+│    │  Step 2: Extract endpoints                                         │  │
+│    │  ────────────────────────────                                      │  │
+│    │  🔍 GREP: @Get|@Post|@Put|@Delete in service                       │  │
+│    │  📄 READ: Route files (320 lines)                                  │  │
+│    │                                                                     │  │
+│    │  Step 3: Find all consumers                                        │  │
+│    │  ────────────────────────────                                      │  │
+│    │  🔍 GREP: "IdentityService" → 847 matches in 234 files             │  │
+│    │  📄 READ: 18 consumer client files (~3,000 lines total)            │  │
+│    │                                                                     │  │
+│    │  Step 4: Map database dependencies                                 │  │
+│    │  ────────────────────────────                                      │  │
+│    │  📄 READ: UserRepository.ts (580 lines)                            │  │
+│    │  📄 READ: 12 migration files (~2,000 lines total)                  │  │
+│    │                                                                     │  │
+│    │  Step 5: Map event dependencies                                    │  │
+│    │  ────────────────────────────                                      │  │
+│    │  🔍 GREP: emit|publish|subscribe in service                        │  │
+│    │  📄 READ: Event handler files                                      │  │
+│    │                                                                     │  │
+│    │  ─────────────────────────────────────────────────────────────     │  │
+│    │  Total exploration: ~8,000 lines read                              │  │
+│    │  Context consumed in fork: ~30,000 tokens                          │  │
+│    │  ─────────────────────────────────────────────────────────────     │  │
+│    │                                                                     │  │
+│    │                         │                                           │  │
+│    │                         ▼                                           │  │
+│    │   ┌──────────────────────────────────────────────────────────────┐ │  │
+│    │   │              CONDENSED SUMMARY                               │ │  │
+│    │   │                  (~1,500 tokens)                             │ │  │
+│    │   │                                                              │ │  │
+│    │   │  • 23 endpoints identified                                   │ │  │
+│    │   │  • 18 consumer services mapped                               │ │  │
+│    │   │  • 5 database tables documented                              │ │  │
+│    │   │  • 6 events catalogued                                       │ │  │
+│    │   │  • Risk levels assigned                                      │ │  │
+│    │   │  • Refactor sequence recommended                             │ │  │
+│    │   └──────────────────────────────────────────────────────────────┘ │  │
+│    │                                                                     │  │
+│    └─────────────────────────────────────────────────────────────────────┘  │
+│                                    │                                        │
+│                                    ▼                                        │
+│                         ┌─────────────────────┐                             │
+│                         │  SUMMARY RETURNED   │                             │
+│                         │  to main context    │                             │
+│                         └─────────────────────┘                             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### The Output You Receive
+
+```markdown
+# IdentityService Dependency Map
+
+## Service Overview
+- **Location**: `src/services/identity/IdentityService.ts`
+- **Endpoints**: 23
+- **Database Tables**: 5
+- **Consumer Services**: 18
+
+## Endpoints by Future Service
+
+### → AuthService
+| Endpoint | Method | Consumers | Daily Calls |
+|----------|--------|-----------|-------------|
+| `/auth/login` | POST | Web, Mobile, API | ~50,000 |
+| `/auth/logout` | POST | Web, Mobile | ~12,000 |
+| `/auth/refresh` | POST | All clients | ~200,000 |
+
+### → UserService
+| Endpoint | Method | Consumers | Daily Calls |
+|----------|--------|-----------|-------------|
+| `/users/:id` | GET | 12 services | ~500,000 |
+| `/users/:id/profile` | PUT | Web, Mobile | ~8,000 |
+
+### → PermissionService
+| Endpoint | Method | Consumers | Daily Calls |
+|----------|--------|-----------|-------------|
+| `/permissions/check` | POST | All services | ~1,000,000 |
+
+## High-Risk Consumers
+
+| Service | Endpoints Used | Risk |
+|---------|----------------|------|
+| OrderService | 3 endpoints | 🔴 High |
+| PaymentService | 2 endpoints | 🔴 High |
+
+## Recommended Refactor Sequence
+
+1. **Phase 1**: PermissionService (lowest risk)
+2. **Phase 2**: UserService (clear boundaries)
+3. **Phase 3**: AuthService (needs careful migration)
+```
+
+### Context Budget for Full Session
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│           FULL REFACTOR SESSION - WITH FORKED RESEARCH                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  1. /map-service-dependencies (forked)              ~1,600 tokens           │
+│     └── (30,000 tokens of work → 1,600 summary)                             │
+│                                                                             │
+│  2. Discussion: Agree on approach                   ~2,000 tokens           │
+│                                                                             │
+│  3. Create PermissionService                       ~15,000 tokens           │
+│                                                                             │
+│  4. Create UserService                             ~18,000 tokens           │
+│                                                                             │
+│  5. Create AuthService                             ~20,000 tokens           │
+│                                                                             │
+│  6. Update tests                                   ~12,000 tokens           │
+│                                                                             │
+│  7. Update documentation                            ~5,000 tokens           │
+│                                                                             │
+│  ═══════════════════════════════════════════════════════════════════════    │
+│  TOTAL: ~73,600 tokens (~37% of 200k window)                                │
+│                                                                             │
+│  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+│                                                                             │
+│  ✅ Plenty of room for iterations and follow-ups!                           │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ## Prerequisites
 
 - [08-forked-context.md](08-forked-context.md) — Core concepts
@@ -459,25 +676,6 @@ You're refactoring `IdentityService` into microservices and need to map all depe
 | Interactive code review | Need back-and-forth discussion |
 | Implementing changes | Need to track what was modified |
 | Learning/exploring | Want to see how Claude works |
-
----
-
-## Command Frontmatter
-
-To enable forked context in a command:
-
-```yaml
----
-description: Your command description
-context: fork
-allowed-tools: Read, Grep, Glob
----
-```
-
-The `context: fork` field tells Claude Code to:
-1. Copy conversation history to the fork
-2. Execute the command in isolation
-3. Return only the final output to main context
 
 ---
 
