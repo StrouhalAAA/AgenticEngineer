@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "miro-mcp": {
+      "type": "sse",
+      "url": "https://mcp.miro.com/sse"
+    }
+  }
+}

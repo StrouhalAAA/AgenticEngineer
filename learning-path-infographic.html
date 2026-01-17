@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Engineer Learning Path</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1a1a1a;
+            --bg-muted: #1a1a1a;
+            --border: #2a2a2a;
+            --border-focus: #3a3a3a;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1a1;
+            --text-muted: #666666;
+            --lime: #84cc16;
+            --lime-bright: #a3e635;
+            --lime-dim: #65a30d;
+            --lime-dark: #3f6212;
+            --accent-cyan: #22d3ee;
+            --accent-yellow: #facc15;
+            --accent-orange: #fb923c;
+            --accent-pink: #f472b6;
+            --accent-purple: #a78bfa;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .terminal-window {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .terminal-header {
+            background: var(--bg-card);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-btn.red { background: #ff5f57; }
+        .terminal-btn.yellow { background: #febc2e; }
+        .terminal-btn.green { background: var(--lime); }
+
+        .terminal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            flex: 1;
+            text-align: center;
+        }
+
+        .terminal-body {
+            padding: 32px;
+        }
+
+        .prompt-line {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-muted);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .prompt-symbol {
+            color: var(--lime);
+            font-weight: 600;
+        }
+
+        .prompt-path {
+            color: var(--lime-bright);
+        }
+
+        .prompt-command {
+            color: var(--text-primary);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: var(--lime);
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+            vertical-align: middle;
+            border-radius: 1px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .subtitle span {
+            color: var(--lime);
+        }
+
+        /* Track Tabs */
+        .track-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 32px;
+            background: var(--bg-card);
+            padding: 4px;
+            border-radius: 8px;
+            width: fit-content;
+            border: 1px solid var(--border);
+        }
+
+        .track-tab {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .track-tab:hover {
+            color: var(--text-primary);
+            background: var(--bg-hover);
+        }
+
+        .track-tab.active {
+            background: var(--lime-dark);
+            color: var(--lime-bright);
+        }
+
+        .track-tab .time {
+            color: var(--text-muted);
+            margin-left: 6px;
+        }
+
+        .track-tab.active .time {
+            color: var(--lime);
+        }
+
+        /* Phase Sections */
+        .phase {
+            margin-bottom: 40px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phase-icon {
+            font-size: 14px;
+            color: var(--lime);
+        }
+
+        .phase-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--lime);
+        }
+
+        .phase-1 .phase-title, .phase-1 .phase-icon { color: var(--lime); }
+        .phase-2 .phase-title, .phase-2 .phase-icon { color: var(--lime-bright); }
+        .phase-3 .phase-title, .phase-3 .phase-icon { color: var(--accent-yellow); }
+        .phase-4 .phase-title, .phase-4 .phase-icon { color: var(--accent-orange); }
+
+        .phase-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        /* Lesson Grid */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.15s ease;
+            cursor: default;
+        }
+
+        .lesson-card:hover {
+            border-color: var(--lime-dim);
+            background: var(--bg-hover);
+        }
+
+        .lesson-card.dimmed {
+            opacity: 0.25;
+        }
+
+        .lesson-card.highlighted {
+            border-color: var(--lime);
+        }
+
+        .lesson-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .lesson-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--bg-primary);
+            background: var(--lime);
+            padding: 2px 6px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .phase-2 .lesson-number { background: var(--lime-bright); }
+        .phase-3 .lesson-number { background: var(--accent-yellow); }
+        .phase-4 .lesson-number { background: var(--accent-orange); }
+
+        .lesson-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .lesson-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .lesson-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .lesson-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .lesson-tags {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 2px 8px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        .tag.new {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .tag.essential {
+            border-color: var(--lime);
+            color: var(--lime);
+        }
+
+        /* Expert Section */
+        .expert-section {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .expert-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .expert-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-pink);
+        }
+
+        .expert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .expert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 3px solid var(--accent-pink);
+        }
+
+        .expert-card.dimmed {
+            opacity: 0.25;
+        }
+
+        .expert-card h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .expert-card p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Summary Bar */
+        .summary-bar {
+            margin-top: 32px;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .summary-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--lime);
+        }
+
+        .start-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            padding: 10px 20px;
+            background: var(--lime);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .start-btn:hover {
+            background: var(--lime-bright);
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .terminal-footer {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-info {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .footer-info span {
+            color: var(--text-secondary);
+        }
+
+        .version-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 4px 10px;
+            background: var(--lime-dark);
+            border: 1px solid var(--lime-dim);
+            border-radius: 4px;
+            color: var(--lime);
+        }
+
+        /* Output block styling */
+        .output-block {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            padding: 12px 16px;
+            background: var(--bg-muted);
+            border-radius: 6px;
+            border-left: 2px solid var(--lime);
+        }
+
+        .output-block .highlight {
+            color: var(--lime);
+        }
+
+        @media (max-width: 768px) {
+            .terminal-window {
+                margin: 16px;
+                border-radius: 8px;
+            }
+
+            .terminal-body {
+                padding: 20px;
+            }
+
+            .track-tabs {
+                flex-wrap: wrap;
+                width: 100%;
+            }
+
+            .track-tab {
+                flex: 1;
+                text-align: center;
+                min-width: 100px;
+            }
+
+            .summary-bar {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .summary-item {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-btn red"></div>
+                <div class="terminal-btn yellow"></div>
+                <div class="terminal-btn green"></div>
+            </div>
+            <div class="terminal-title">~/agentic-engineer — learning-path</div>
+        </div>
+
+        <div class="terminal-body">
+            <div class="prompt-line">
+                <span class="prompt-symbol">❯</span>
+                <span class="prompt-path">~/agentic-engineer</span>
+                <span class="prompt-command">claude --guide</span>
+                <span class="cursor"></span>
+            </div>
+
+            <h1>Agentic Engineer Learning Path</h1>
+            <p class="subtitle"><span>#</span> Master Claude Code in structured lessons</p>
+
+            <div class="output-block">
+                <span class="highlight">→</span> 11 lessons across 4 phases<br>
+                <span class="highlight">→</span> 3 learning tracks available<br>
+                <span class="highlight">→</span> Select a track to highlight relevant lessons
+            </div>
+
+            <div class="track-tabs">
+                <button class="track-tab active" onclick="selectTrack('all', this)">
+                    full-course<span class="time">4.5h</span>
+                </button>
+                <button class="track-tab" onclick="selectTrack('quickstart', this)">
+                    quick-start<span class="time">1h</span>
+                </button>
+                <button class="track-tab" onclick="selectTrack('poweruser', this)">
+                    power-user<span class="time">2h</span>
+                </button>
+            </div>
+
+            <!-- Phase 1: Foundations -->
+            <div class="phase phase-1">
+                <div class="phase-header">
+                    <span class="phase-icon">◆</span>
+                    <span class="phase-title">Phase 1: Foundations</span>
+                    <span class="phase-desc">The mental model</span>
+                </div>
+                <div class="lessons-grid">
+                    <div class="lesson-card" data-tracks="all,quickstart">
+                        <div class="lesson-top">
+                            <span class="lesson-number">01</span>
+                            <span class="lesson-title">core-concepts</span>
+                        </div>
+                        <p class="lesson-desc">How Claude Code works. The foundation for everything else.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 15 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag essential">start-here</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all,quickstart">
+                        <div class="lesson-top">
+                            <span class="lesson-number">02</span>
+                            <span class="lesson-title">commands</span>
+                        </div>
+                        <p class="lesson-desc">Create slash commands for repetitive workflows.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 20 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">hands-on</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all">
+                        <div class="lesson-top">
+                            <span class="lesson-number">03</span>
+                            <span class="lesson-title">skills</span>
+                        </div>
+                        <p class="lesson-desc">Build reusable, auto-invoked capabilities with hot-reload.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 15 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag new">v2.1.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: Configuration -->
+            <div class="phase phase-2">
+                <div class="phase-header">
+                    <span class="phase-icon">◆</span>
+                    <span class="phase-title">Phase 2: Configuration</span>
+                    <span class="phase-desc">Customize behavior</span>
+                </div>
+                <div class="lessons-grid">
+                    <div class="lesson-card" data-tracks="all,quickstart">
+                        <div class="lesson-top">
+                            <span class="lesson-number">04</span>
+                            <span class="lesson-title">settings</span>
+                        </div>
+                        <p class="lesson-desc">Permissions, defaults, and wildcard approvals.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 10 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag essential">essential</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all,poweruser">
+                        <div class="lesson-top">
+                            <span class="lesson-number">4a</span>
+                            <span class="lesson-title">terminal-config</span>
+                        </div>
+                        <p class="lesson-desc">Notifications, parallel sessions, terminal optimization.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 15 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">productivity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all,poweruser">
+                        <div class="lesson-top">
+                            <span class="lesson-number">4b</span>
+                            <span class="lesson-title">model-config</span>
+                        </div>
+                        <p class="lesson-desc">Choose models strategically. Learn opusplan.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 15 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">cost-saving</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all,poweruser">
+                        <div class="lesson-top">
+                            <span class="lesson-number">4c</span>
+                            <span class="lesson-title">statusline</span>
+                        </div>
+                        <p class="lesson-desc">Custom status display: model, cost, git branch.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 15 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag new">v2.1.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all,quickstart">
+                        <div class="lesson-top">
+                            <span class="lesson-number">05</span>
+                            <span class="lesson-title">CLAUDE.md</span>
+                        </div>
+                        <p class="lesson-desc">Project context files. @import for lean memory.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 15 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag essential">key-concept</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all">
+                        <div class="lesson-top">
+                            <span class="lesson-number">06</span>
+                            <span class="lesson-title">hooks</span>
+                        </div>
+                        <p class="lesson-desc">Event-driven automation with agent-scoped triggers.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 15 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">automation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 3: Context Management -->
+            <div class="phase phase-3">
+                <div class="phase-header">
+                    <span class="phase-icon">◆</span>
+                    <span class="phase-title">Phase 3: Context Management</span>
+                    <span class="phase-desc">Isolation strategies</span>
+                </div>
+                <div class="lessons-grid">
+                    <div class="lesson-card" data-tracks="all,poweruser">
+                        <div class="lesson-top">
+                            <span class="lesson-number">07</span>
+                            <span class="lesson-title">subagents</span>
+                        </div>
+                        <p class="lesson-desc">Delegate to specialized agents. Parallel execution.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 20 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all,poweruser">
+                        <div class="lesson-top">
+                            <span class="lesson-number">08</span>
+                            <span class="lesson-title">forked-context</span>
+                        </div>
+                        <p class="lesson-desc">History-aware isolation. Best of both worlds.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 25 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag new">v2.1.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 4: Extensibility -->
+            <div class="phase phase-4">
+                <div class="phase-header">
+                    <span class="phase-icon">◆</span>
+                    <span class="phase-title">Phase 4: Extensibility</span>
+                    <span class="phase-desc">Connect & share</span>
+                </div>
+                <div class="lessons-grid">
+                    <div class="lesson-card" data-tracks="all">
+                        <div class="lesson-top">
+                            <span class="lesson-number">09</span>
+                            <span class="lesson-title">mcp</span>
+                        </div>
+                        <p class="lesson-desc">Model Context Protocol. Connect external tools.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 20 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">integration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all">
+                        <div class="lesson-top">
+                            <span class="lesson-number">10</span>
+                            <span class="lesson-title">plugins</span>
+                        </div>
+                        <p class="lesson-desc">Bundle and distribute team configurations.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 25 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">team</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-card" data-tracks="all">
+                        <div class="lesson-top">
+                            <span class="lesson-number">11</span>
+                            <span class="lesson-title">lsp</span>
+                        </div>
+                        <p class="lesson-desc">Language Server Protocol. IDE-like code intelligence.</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-time">⏱ 20 min</span>
+                            <div class="lesson-tags">
+                                <span class="tag">code-intel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Section -->
+            <div class="expert-section">
+                <div class="expert-header">
+                    <span class="phase-icon" style="color: var(--accent-pink);">★</span>
+                    <span class="expert-title">Expert Patterns</span>
+                </div>
+                <div class="expert-grid">
+                    <div class="expert-card" data-tracks="all,poweruser">
+                        <h4>parallel-sessions</h4>
+                        <p>Run 5+ Claude sessions simultaneously with notifications and handoffs.</p>
+                    </div>
+                    <div class="expert-card" data-tracks="all,poweruser">
+                        <h4>lean-memory</h4>
+                        <p>Keep CLAUDE.md under 100 lines with @imports and smart context management.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="summary-bar">
+                <div class="summary-item">
+                    <span class="summary-label">Track</span>
+                    <span class="summary-value" id="trackName">full-course</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Duration</span>
+                    <span class="summary-value" id="totalTime">4.5 hours</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Lessons</span>
+                    <span class="summary-value" id="lessonCount">11</span>
+                </div>
+                <a href="lessons/foundations/01-core-concepts.md" class="start-btn">
+                    ./start →
+                </a>
+            </div>
+
+            <!-- Footer -->
+            <div class="terminal-footer">
+                <div class="footer-info">
+                    <span>maintainer:</span> Jakub Strouhal
+                </div>
+                <div class="version-badge">Claude Code 2.1.0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const trackData = {
+            all: { name: 'full-course', time: '4.5 hours', lessons: 11 },
+            quickstart: { name: 'quick-start', time: '1 hour', lessons: 4 },
+            poweruser: { name: 'power-user', time: '2 hours', lessons: 6 }
+        };
+
+        function selectTrack(track, btn) {
+            // Update tabs
+            document.querySelectorAll('.track-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            btn.classList.add('active');
+
+            // Update cards
+            document.querySelectorAll('.lesson-card, .expert-card').forEach(card => {
+                const tracks = card.dataset.tracks ? card.dataset.tracks.split(',') : [];
+                if (track === 'all' || tracks.includes(track)) {
+                    card.classList.remove('dimmed');
+                } else {
+                    card.classList.add('dimmed');
+                }
+            });
+
+            // Update summary
+            document.getElementById('trackName').textContent = trackData[track].name;
+            document.getElementById('totalTime').textContent = trackData[track].time;
+            document.getElementById('lessonCount').textContent = trackData[track].lessons;
+        }
+    </script>
+</body>
+</html>

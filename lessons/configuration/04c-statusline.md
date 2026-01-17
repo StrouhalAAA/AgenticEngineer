@@ -313,6 +313,12 @@ See also: [team-template/](../../team-template/) for shareable configurations.
 
 ---
 
+## Related
+
+- [Status Line Team Guide (Czech)](../../reference/settings/statusline-guide-cz.md) - Detailed team configuration guide with Status Line vs Hooks clarification
+
+---
+
 ## Next Module
 
 Continue to [05-claude-md.md](./05-claude-md.md) to master project context files.

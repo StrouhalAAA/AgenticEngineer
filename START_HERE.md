@@ -42,6 +42,7 @@
 |---|--------|------|-------------------|
 | 7 | [Subagents](lessons/context-management/07-subagents.md) | 20 min | Delegate to specialists |
 | 8 | [Forked Context](lessons/context-management/08-forked-context.md) | 25 min | History-aware isolation |
+| 8a | [Forked Context Visualized](lessons/context-management/08a-forked-context-visualized.md) | 15 min | Visual deep-dive with examples |
 
 ### Extensibility (Lessons 9-11)
 

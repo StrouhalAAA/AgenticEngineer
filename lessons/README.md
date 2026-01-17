@@ -39,6 +39,7 @@ Master isolation strategies for complex workflows.
 |--------|-------|------|---------|
 | [07-subagents](context-management/07-subagents.md) | Delegate to specialists | 20 min | 01, 03 |
 | [08-forked-context](context-management/08-forked-context.md) | History-aware isolation | 25 min | 07 |
+| [08a-forked-context-visualized](context-management/08a-forked-context-visualized.md) | Visual deep-dive | 15 min | 08 |
 
 See [Context Management Overview](context-management/README.md) for decision guidance.
 
@@ -71,6 +72,7 @@ Connect external tools, share configurations, and enable code intelligence.
 | Automate with triggers | [06-hooks](configuration/06-hooks.md) |
 | Delegate to subagents | [07-subagents](context-management/07-subagents.md) |
 | Use forked context | [08-forked-context](context-management/08-forked-context.md) |
+| See forked context visualized | [08a-forked-context-visualized](context-management/08a-forked-context-visualized.md) |
 | Connect external tools | [09-mcp](extensibility/09-mcp.md) |
 | Share team configurations | [10-plugins](extensibility/10-plugins.md) |
 | Enable IDE-like code intelligence | [11-lsp](extensibility/11-lsp.md) |
