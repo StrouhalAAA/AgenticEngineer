@@ -119,9 +119,8 @@ Use these as templates for your project:
 ## Learning Path
 
 1. Read [ACBS Reference README](../../../agentic-coding/acbs-reference/README.md)
-2. Study [TAD-02: Command Design](../../../agentic-coding/TAD-02-command-design.md)
-3. Try each command to see resolution in action
-4. Build your own parameterized commands
+2. Try each command to see resolution in action
+3. Build your own parameterized commands
 
 ## File Structure
 
@@ -136,5 +135,4 @@ Use these as templates for your project:
 ## Related
 
 - [ACBS Project Reference](../../../agentic-coding/acbs-reference/)
-- [TAD-02: Command Design Tutorial](../../../agentic-coding/TAD-02-command-design.md)
 - [03-skills.md](../../../lessons/foundations/03-skills.md)

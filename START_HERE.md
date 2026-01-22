@@ -11,7 +11,6 @@
 | 2026-01-11 | Added Expert Patterns (Parallel Sessions, Lean Memory) | [Expert Patterns](reference/expert-patterns/) |
 | 2025-01-10 | Reorganized lessons into thematic sections | [Learning Path](lessons/README.md) |
 | 2025-01-10 | Added Forked Context module | [08-forked-context](lessons/context-management/08-forked-context.md) |
-| 2025-01-10 | Added TAD fundamentals | [TAD-01](agentic-coding/TAD-01-fundamentals.md) |
 | 2025-01-10 | Initial structure | - |
 
 ## Start Here
@@ -71,7 +70,7 @@ Complete all lessons in order.
 
 ### Track 4: Command Design (1.5 hours)
 For developers building parameterized commands:
-- 02-commands → 03-skills → [TAD-02: Command Design](agentic-coding/TAD-02-command-design.md)
+- 02-commands → 03-skills
 - Practice with [ACBS Example Commands](.claude/commands/examples/acbs/)
 
 ## Quick Links
@@ -82,7 +81,6 @@ For developers building parameterized commands:
 - [Shortcuts (CZ)](reference/shortcuts-cz.md) — Kompletní tahák (80+ flagů, 30+ příkazů)
 - [Expert Patterns](reference/expert-patterns/) — Parallel sessions, lean memory
 - [Exercises](exercises/) — Hands-on practice
-- [Agentic Coding](agentic-coding/) — Advanced team training
 - [Team Template](team-template/) — Copy-paste configurations
 
 ## Expert Patterns
@@ -142,7 +140,7 @@ git pull origin main    # Your local/ folders are gitignored, safe!
 
 Your changes in `local/` folders **never conflict** with upstream updates.
 
-**Full guide**: [CONTRIBUTING-cz.md](CONTRIBUTING-cz.md)
+**Full guide**: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ---
 

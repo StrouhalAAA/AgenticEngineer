@@ -561,6 +561,5 @@ You now understand:
 9. ✅ Plugins for team standardization
 
 **Continue your journey:**
-- Explore advanced patterns in [agentic-coding/](../agentic-coding/)
 - Practice with [exercises/](../exercises/)
 - Deep dive into [reference/](../reference/) documentation

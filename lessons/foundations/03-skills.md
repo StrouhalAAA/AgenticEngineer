@@ -402,7 +402,6 @@ Research-heavy skills that read many files can pollute your main context with to
 Want to build commands that accept variables like `/audit <domain>` or `/analyze <product> <layer>`?
 
 See the **ACBS example commands** for real-world patterns:
-- [TAD-02: Command Design Tutorial](../../agentic-coding/TAD-02-command-design.md) — Full tutorial on variable parsing and resolution
 - [Example Commands](../../.claude/commands/examples/acbs/) — Working templates with `argument-hint` and context injection
 
 ---

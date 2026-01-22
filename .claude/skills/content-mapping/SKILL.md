@@ -69,17 +69,6 @@ Content is a **command** if it:
 
 **Target location**: `.claude/commands/{tools|workflows|examples}/{name}.md`
 
-### TAD Module Detection
-
-Content is a **TAD module** if it:
-- Is advanced training material
-- References team adoption or onboarding
-- Contains exercises for development teams
-- Discusses agentic development practices
-- Follows TAD-NN naming pattern
-
-**Target location**: `agentic-coding/TAD-NN-topic.md`
-
 ### Agent Definition Detection
 
 Content is an **agent definition** if it:
@@ -179,15 +168,6 @@ Commands are **auto-discovered** — no hub updates typically needed.
 Exception: If the command is user-facing and significant, add to:
 - `/CLAUDE.md` Commands section
 
-### When Adding TAD Module
-
-1. **`/agentic-coding/README.md`**
-   - Add to the Modules table
-   - Update learning path sequence
-
-2. **`/START_HERE.md`**
-   - Add to Track 4 (Advanced Agentic) if appropriate
-
 ## Naming Conventions
 
 ### Lesson Numbering
@@ -265,4 +245,3 @@ Use these to classify which section content belongs in:
 | `context-management` | Managing conversation context | Subagents, forked context, memory |
 | `extensibility` | Extending Claude Code | MCP, plugins, LSP integration |
 | `expert-patterns` | Advanced techniques | Power-user optimizations |
-| `agentic-coding` | Team training | TAD methodology, team adoption |

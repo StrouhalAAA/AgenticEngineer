@@ -88,7 +88,6 @@ Tyto adresare dostávají pravidelne upstream aktualizace. **Nemodifikujte primo
 |---------|-------|------|
 | `lessons/` | Vyukove moduly | Bude aktualizovano novym obsahem |
 | `reference/` | Referencni dokumenty | Dostava opravy a doplnky |
-| `agentic-coding/` | TAD skoleni | Nove moduly se pridavaji pravidelne |
 | `.claude/commands/workflows/` | Sdilene tymove workflow | Koordinovane aktualizace |
 
 **Pokud potrebujete upravit workflow**, zkopirujte ho do `.claude/commands/local/` a upravte kopii.
@@ -146,7 +145,6 @@ agentic-engineer-playbook/
 ├── CLAUDE.local.md              # Osobni (gitignorovany)
 ├── lessons/                     # Read-only vyukovy obsah
 ├── reference/                   # Read-only referencni dokumenty
-├── agentic-coding/              # Read-only TAD moduly
 ├── .claude/
 │   ├── commands/
 │   │   ├── workflows/           # Sdilene prikazy (trackovane)

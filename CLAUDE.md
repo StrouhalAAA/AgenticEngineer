@@ -16,7 +16,6 @@ Educational repository teaching Claude Code fundamentals to development teams.
   - `expert-patterns/` - Parallel sessions, lean memory
   - `skills/`, `subagents/`, `hooks/`, `settings/`, `plugins/`
 - `learn/claude-code/release-notes/` - Version tracking
-- `agentic-coding/` - Advanced TAD training
 - `team-template/` - Copy-paste team configurations
 - `exercises/` - Hands-on practice
 

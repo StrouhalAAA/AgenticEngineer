@@ -51,10 +51,7 @@ flowchart TD
         E1[MCP] --> E2[Pluginy] --> E3[LSP]
     end
 
-    L4 --> ADV[🎓 Pokročilé: TAD Training]
-
     style START fill:#c8e6c9,stroke:#2e7d32
-    style ADV fill:#f3e5f5,stroke:#7b1fa2
 ```
 
 ---
@@ -65,7 +62,6 @@ flowchart TD
 flowchart LR
     subgraph LEARN["📚 K učení"]
         A1[lessons/] --> A2[Tutoriály krok za krokem]
-        A3[agentic-coding/] --> A4[Pokročilý TAD training]
     end
 
     subgraph LOOKUP["📖 K vyhledání"]
@@ -97,7 +93,6 @@ flowchart LR
 |--------|-------------|
 | `lessons/` | 11 tutoriálů ve 4 sekcích |
 | `reference/` | Dokumenty pro rychlé vyhledání, příklady, vzory |
-| `agentic-coding/` | Enterprise-scale training (TAD) |
 | `.claude/` | Funkční příkazy, které můžeš spustit |
 | `team-template/` | Připravená konfigurace pro tým |
 

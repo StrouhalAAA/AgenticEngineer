@@ -29,7 +29,6 @@ These files contain tables, lists, or links that must be updated when related co
 | `/lessons/README.md` | Any lesson added/modified |
 | `/lessons/{section}/README.md` | Lessons in that section change |
 | `/reference/expert-patterns/README.md` | New expert patterns added |
-| `/agentic-coding/README.md` | New TAD modules added |
 | `/learn/claude-code/release-notes/INDEX.md` | New release notes added |
 | `/team-template/README.md` | New templates added |
 
@@ -41,7 +40,6 @@ These files contain tables, lists, or links that must be updated when related co
 | **Expert Pattern** | Advanced technique writeup | `reference/expert-patterns/{topic}.md` | `reference/expert-patterns/parallel-sessions.md` |
 | **Release Notes** | Version changelog | `learn/claude-code/release-notes/YYYY-MM-DD-vX.X.X.md` | `2026-01-10-v2.1.2.md` |
 | **Reference Doc** | Quick lookup material | `reference/{category}/{topic}.md` | `reference/skills/examples.md` |
-| **TAD Module** | Team training content | `agentic-coding/TAD-NN-topic.md` | `TAD-02-command-design.md` |
 | **Workflow Command** | Multi-step process | `.claude/commands/workflows/{name}.md` | `workflows/feature.md` |
 | **Tool Command** | Utility/helper | `.claude/commands/tools/{name}.md` | `tools/prime.md` |
 | **Example Command** | Teaching example | `.claude/commands/examples/{category}/{name}.md` | `examples/acbs/audit-domain.md` |
@@ -91,7 +89,6 @@ Use these classification signals:
 | **Release Notes** | Version numbers (vX.X.X), features/fixes, dates |
 | **Reference Doc** | Quick lookup, tables, syntax/usage focus |
 | **Command** | YAML frontmatter, `$ARGUMENTS`, workflow steps |
-| **TAD Module** | Team training, adoption exercises |
 
 ### Step 3: Determine Location
 
