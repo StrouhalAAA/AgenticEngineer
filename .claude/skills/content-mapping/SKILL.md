@@ -92,11 +92,26 @@ Content is an **agent definition** if it:
 
 ## Hub File Update Rules
 
+### Visual Schema Updates
+
+The `/visual-schema.md` file contains Mermaid diagrams showing repository structure. Consider updating it when:
+
+- **Adding a new lesson** → Update "Cesta učení" (Learning Path) diagram if it adds a new section
+- **Adding a new directory** → Update "Přehled adresářů" (Directory Overview) table
+- **Adding a new learning track** → Update "Vyber si svou cestu" (Choose Your Track) table
+- **Major structural changes** → Update all relevant diagrams
+
+Update the changelog at the top of `visual-schema.md` with version increment and change description.
+
 ### When Adding a Lesson
 
 Update these files in order:
 
-1. **`/START_HERE.md`**
+1. **`/visual-schema.md`** (if structural change)
+   - Update learning path diagram if new section
+   - Increment version in changelog
+
+2. **`/START_HERE.md`**
    - Add row to the appropriate section table (Foundations, Configuration, Context Management, or Extensibility)
    - Table format:
    ```markdown
@@ -146,6 +161,10 @@ Update these files:
 
 3. **`/lessons/README.md`**
    - Add to Expert Patterns section if relevant to lessons
+
+4. **`/visual-schema.md`** (if adds new learning track)
+   - Consider adding to "Vyber si svou cestu" table
+   - Increment changelog version
 
 ### When Adding Reference Doc
 

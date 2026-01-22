@@ -1,8 +1,16 @@
-# Local overrides
+# Local overrides (developer customizations)
 .claude/settings.local.json
+.claude/commands/local/*
+!.claude/commands/local/README.md
+.claude/agents/local/*
+!.claude/agents/local/README.md
 CLAUDE.local.md
 .env
 .env.*
+
+# Personal scratch/notes
+scratch/
+notes/
 
 # IDE
 .idea/

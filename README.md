@@ -10,12 +10,14 @@ Educational repository for mastering Claude Code.
 
 | Quick Links | |
 |-------------|---|
-| [Lessons](lessons/) | 10 core modules |
-| [Reference](reference/) | Skills, Subagents, Hooks, Settings |
+| [Lessons](lessons/) | 11 core modules |
+| [Reference](reference/) | Skills, Subagents, Hooks, Settings, Shortcuts |
+| [Shortcuts (CZ)](reference/shortcuts-cz.md) | Kompletní tahák (80+ flagů, 30+ příkazů) |
 | [Release Notes](learn/claude-code/release-notes/) | Version tracking |
 | [Agentic Coding](agentic-coding/) | Advanced TAD training |
 | [Exercises](exercises/) | Hands-on practice |
-| [Visual Guide](https://miro.com/app/board/uXjVJkcGGBM=/?share_link_id=403387313656) | Presentation & visualisation |
+| [Visual Schema (CZ)](visual-schema.md) | Mapa učení s Mermaid diagramy |
+| [Visual Guide (Miro)](https://miro.com/app/board/uXjVJkcGGBM=/?share_link_id=403387313656) | Interactive presentation |
 
 ## What's New in 2.1.0
 

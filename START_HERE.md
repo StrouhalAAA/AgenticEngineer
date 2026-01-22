@@ -6,6 +6,7 @@
 
 | Date | Change | Link |
 |------|--------|------|
+| 2026-01-22 | Added Czech shortcuts/cheatsheet reference | [shortcuts-cz](reference/shortcuts-cz.md) |
 | 2026-01-11 | Added Terminal, Model, Status Line lessons | [Learning Path](lessons/README.md) |
 | 2026-01-11 | Added Expert Patterns (Parallel Sessions, Lean Memory) | [Expert Patterns](reference/expert-patterns/) |
 | 2025-01-10 | Reorganized lessons into thematic sections | [Learning Path](lessons/README.md) |
@@ -75,8 +76,10 @@ For developers building parameterized commands:
 
 ## Quick Links
 
+- [Visual Schema (CZ)](visual-schema.md) — Mapa učení s Mermaid diagramy
 - [Learning Path Overview](lessons/README.md) — Thematic lesson navigation
 - [Reference Docs](reference/) — Look up syntax and examples
+- [Shortcuts (CZ)](reference/shortcuts-cz.md) — Kompletní tahák (80+ flagů, 30+ příkazů)
 - [Expert Patterns](reference/expert-patterns/) — Parallel sessions, lean memory
 - [Exercises](exercises/) — Hands-on practice
 - [Agentic Coding](agentic-coding/) — Advanced team training
@@ -115,10 +118,31 @@ Create custom styles in `.claude/output-styles/` — see [Output Styles Guide](r
 ## Using This Repo
 
 ```bash
-cd Agenticengineer
+cd agentic-engineer-playbook
 claude
 > /prime
 ```
+
+### Staying in Sync
+
+This repo receives regular updates. To sync while keeping your customizations:
+
+```bash
+git pull origin main    # Your local/ folders are gitignored, safe!
+/prime                  # Refresh Claude's understanding
+```
+
+### Adding Your Customizations
+
+| What | Where | Git Status |
+|------|-------|------------|
+| Personal commands | `.claude/commands/local/` | Gitignored |
+| Personal agents | `.claude/agents/local/` | Gitignored |
+| Local rules | `CLAUDE.local.md` | Gitignored |
+
+Your changes in `local/` folders **never conflict** with upstream updates.
+
+**Full guide**: [CONTRIBUTING-cz.md](CONTRIBUTING-cz.md)
 
 ---
 
