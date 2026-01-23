@@ -325,6 +325,8 @@ tasks = [
 # Both run in parallel, results collected later
 ```
 
+> 📘 **Command available**: Use `/tools:parallel-subagents <task> [count]` for structured parallel agent launches. See [parallel-subagents command](../../.claude/commands/tools/parallel-subagents.md).
+
 ### Example C: Chained Workflow
 
 ```python

@@ -126,7 +126,7 @@ Match tools to agent responsibilities:
 
 ## Orchestration Patterns
 
-### Hub-and-Spoke Pattern
+### Hub-and-Spoke Pattern (Parallel)
 
 ```
 ┌─────────────────┐
@@ -138,6 +138,8 @@ Match tools to agent responsibilities:
 │Security│ │Quality│ │ Perf  │
 └───────┘ └───────┘ └───────┘
 ```
+
+> 📘 **Command available**: Use `/tools:parallel-subagents <task> [count]` for structured parallel launches.
 
 ### Sequential Chain
 
@@ -245,6 +247,23 @@ context: fork
    > Use commit-helper to suggest a message
    ```
 
+### Exercise 6.3: Launch Parallel Subagents
+
+1. Use the parallel-subagents command:
+   ```
+   /tools:parallel-subagents "Find all TODO comments and categorize by priority" 3
+   ```
+
+2. Observe how Claude:
+   - Designs unique prompts for each agent
+   - Launches all agents simultaneously
+   - Synthesizes results into a unified report
+
+3. Try with a security audit:
+   ```
+   /tools:parallel-subagents "Audit for OWASP Top 10 vulnerabilities" 3
+   ```
+
 ---
 
 ## Summary
@@ -258,6 +277,7 @@ context: fork
 | **Custom Agents** | `.claude/agents/<n>.md` |
 | **Tools** | Match to role (read-only vs. full) |
 | **vs Fork** | Subagents start empty; fork inherits context |
+| **Parallel Launch** | `/tools:parallel-subagents` for simultaneous agents |
 
 ---
 
