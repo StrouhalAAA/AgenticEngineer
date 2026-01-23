@@ -8,11 +8,13 @@ Complete all 11 lessons in [lessons/](../lessons/) first.
 
 ## Training Modules
 
-| Module | Focus | Duration |
-|--------|-------|----------|
-| [TAD-01](./TAD-01-fundamentals.md) | Fundamentals | 2 hours |
-| [TAD-02](./TAD-02-command-design.md) | Parameterized Command Design | 2 hours |
-| TAD-03 (coming) | Team Patterns | 2 hours |
+| Module | Language | Description |
+|--------|----------|-------------|
+| [Output-First Thinking](output-first-thinking.md) | CZ | Templating pro agenticky coding - jak definovat vstupy a vystupy pro out-of-loop execution |
+
+### Coming Soon
+
+*ADWS training modules coming soon.*
 
 ## ACBS Project Reference
 

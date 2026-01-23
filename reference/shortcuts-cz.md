@@ -55,7 +55,9 @@ Tato sekce obsahuje **nejcasteji pouzivane** zkratky a flagy s praktickymi prikl
 
 ---
 
-## 🖥️ Priklady pro Frontend vyvojare
+## 🖥️ Priklady pro Frontend vyvojare (Vue 3)
+
+> **Tech stack:** Vue 3 + Composition API, Pinia, Vite, Vitest
 
 ### Denni workflow
 
@@ -63,28 +65,29 @@ Tato sekce obsahuje **nejcasteji pouzivane** zkratky a flagy s praktickymi prikl
 # Rano - navazat na vcereji praci
 claude -c
 
-# Review React komponenty pro pristupnost
+# Review Vue komponenty pro pristupnost
 claude -p --append-system-prompt "Dodrzuj WCAG 2.1 AA standardy" \
-  "Zkontroluj pristupnost @src/components/Button.tsx"
+  "Zkontroluj pristupnost @src/components/BaseButton.vue"
 
 # Automaticka oprava ESLint chyb
 claude -p --allowedTools "Write,Bash(npm run lint:*)" \
   "Oprav vsechny ESLint chyby v projektu"
 
 # Generovat testy pro komponentu
-claude "Napis unit testy pro @src/components/Modal.tsx pouzij React Testing Library"
+claude "Napis unit testy pro @src/components/BaseModal.vue pouzij Vitest a Vue Test Utils"
 ```
 
 ### Typicke scenare
 
 | Uloha | Doporuceny prikaz |
 |-------|-------------------|
-| **Debug stavu** | `claude "Vysvetli data flow v @src/store/auth.ts"` |
+| **Debug stavu** | `claude "Vysvetli data flow v @src/stores/auth.ts"` (Pinia store) |
 | **CSS problem** | `claude -p "Proc se tento grid rozbiji na mobilu? @src/styles/grid.css"` |
-| **Refaktoring** | `claude --model opus "Refaktoruj na React hooks @src/components/Form.tsx"` |
-| **Code review** | `claude -p --append-system-prompt "Zamer se na performance a a11y" @src/` |
-| **Bundle size** | `cat webpack-stats.json \| claude -p "Najdi zbytecne velke zavislosti"` |
-| **API mock** | `claude "Vytvor MSW handlery pro @src/api/users.ts"` |
+| **Refaktoring** | `claude --model opus "Refaktoruj na Composition API @src/components/UserForm.vue"` |
+| **Code review** | `claude -p --append-system-prompt "Zamer se na Vue 3 best practices a a11y" @src/` |
+| **Bundle size** | `cat stats.html \| claude -p "Analyzuj Vite bundle a najdi zbytecne velke zavislosti"` |
+| **API composable** | `claude "Vytvor composable useUsers pro @src/api/users.ts s Vue Query"` |
+| **Pinia store** | `claude "Vytvor Pinia store pro sprava uzivatelu podle @src/types/user.ts"` |
 
 ### Doporucene nastaveni v settings.json
 
@@ -94,7 +97,8 @@ claude "Napis unit testy pro @src/components/Modal.tsx pouzij React Testing Libr
     "allow": [
       "Bash(npm run lint:*)",
       "Bash(npm run test:*)",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(npx vitest:*)"
     ]
   },
   "hooks": {
@@ -108,7 +112,9 @@ claude "Napis unit testy pro @src/components/Modal.tsx pouzij React Testing Libr
 
 ---
 
-## ⚙️ Priklady pro Backend vyvojare
+## ⚙️ Priklady pro Backend vyvojare (.NET)
+
+> **Tech stack:** .NET 8, ASP.NET Core Web API, Entity Framework Core, SQL Server
 
 ### Denni workflow
 
@@ -118,26 +124,28 @@ cat logs/api.log | claude -p "Identifikuj pomale endpointy a navrhni optimalizac
 
 # Debug s limitem nakladu
 claude -p --max-turns 5 --max-budget-usd 2.00 \
-  "Najdi memory leak v @src/services/cache.ts"
+  "Najdi memory leak v @src/Services/CacheService.cs"
 
-# Database migrace review
-claude --model opus "Zkontroluj bezpecnost teto migrace @migrations/20240115_add_users.sql"
+# EF Core migrace review
+claude --model opus "Zkontroluj bezpecnost teto migrace @Migrations/20240115_AddUsers.cs"
 
 # Generovat API dokumentaci
 claude -p --output-format json \
-  "Vygeneruj OpenAPI spec pro @src/routes/users.ts"
+  "Vygeneruj OpenAPI spec pro @Controllers/UsersController.cs"
 ```
 
 ### Typicke scenare
 
 | Uloha | Doporuceny prikaz |
 |-------|-------------------|
-| **API error** | `cat error.log \| claude -p "Vysvetli tuto chybu a navrhni opravu"` |
-| **Performance** | `claude "Optimalizuj SQL dotaz v @src/repositories/orders.ts"` |
-| **Security audit** | `claude -p --model opus "Bezpecnostni audit @src/auth/"` |
-| **Microservices** | `claude --add-dir ../service-a ../service-b "Jak spolu komunikuji?"` |
-| **Docker debug** | `docker logs app | claude -p "Co zpusobuje restart kontejneru?"` |
-| **Test coverage** | `claude "Pridej integracni testy pro @src/services/payment.ts"` |
+| **API error** | `cat error.log \| claude -p "Vysvetli tuto .NET exception a navrhni opravu"` |
+| **Performance** | `claude "Optimalizuj LINQ dotaz v @Repositories/OrderRepository.cs"` |
+| **Security audit** | `claude -p --model opus "Bezpecnostni audit @Controllers/ a @Services/Auth/"` |
+| **Microservices** | `claude --add-dir ../ServiceA ../ServiceB "Jak spolu komunikuji pres HTTP/gRPC?"` |
+| **Docker debug** | `docker logs app | claude -p "Co zpusobuje restart .NET kontejneru?"` |
+| **Test coverage** | `claude "Pridej xUnit integracni testy pro @Services/PaymentService.cs"` |
+| **EF migration** | `claude "Vytvor EF Core migraci pro pridani tabulky Invoices"` |
+| **Middleware** | `claude "Vytvor middleware pro rate limiting v ASP.NET Core"` |
 
 ### Doporucene nastaveni v settings.json
 
@@ -145,13 +153,15 @@ claude -p --output-format json \
 {
   "permissions": {
     "allow": [
-      "Bash(npm run test:*)",
-      "Bash(docker compose:*)",
-      "Bash(psql:*)"
+      "Bash(dotnet test:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet ef:*)",
+      "Bash(docker compose:*)"
     ],
     "deny": [
       "Bash(rm -rf:*)",
-      "Read(./.env.production)"
+      "Read(./appsettings.Production.json)",
+      "Read(./**/secrets.json)"
     ]
   },
   "hooks": {
@@ -182,8 +192,10 @@ claude -c                    # Pokracovat ve vcereji praci
 
 ```bash
 /plan                        # Review pred aplikaci zmen
-@src/file.js                 # Rychla reference souboru
-! npm test                   # Spustit testy bez opusteni Claude
+@src/components/MyComponent.vue  # Rychla reference Vue souboru
+@Controllers/UsersController.cs  # Rychla reference .NET souboru
+! npm test                   # Spustit frontend testy
+! dotnet test                # Spustit backend testy
 ```
 
 ### Pred pushem
@@ -755,9 +767,10 @@ Kazdy worktree ma izolovane soubory pri sdileni Git historie - idealni pro paral
 ### @ zminky pro efektivni kontext
 
 ```
-@src/utils/auth.js        # Reference konkretniho souboru
-@./src/                   # Reference adresare
-@github:issue://123       # Reference MCP zdroju
+@src/components/Login.vue     # Reference Vue komponenty
+@Controllers/AuthController.cs # Reference .NET controlleru
+@./src/                       # Reference adresare
+@github:issue://123           # Reference MCP zdroju
 ```
 
 ### Bash prikazy na pozadi
@@ -770,13 +783,19 @@ Stisknete `Ctrl+B` pro presun beziciho prikazu na pozadi (uzivatele Tmux: stiskn
 # Prehled projektu
 Strucny popis architektury
 
+## Tech Stack
+- Frontend: Vue 3 + Composition API, Pinia, Vite
+- Backend: .NET 8, ASP.NET Core, EF Core
+
 # Klicove prikazy
-- `npm run test` - Spustit testovaci sadu
-- `npm run lint` - Lintovat codebase
+- `npm run test` - Spustit frontend testy (Vitest)
+- `npm run lint` - Lintovat frontend
+- `dotnet test` - Spustit backend testy (xUnit)
+- `dotnet ef migrations add` - Pridat EF migraci
 
 # Standardy kodovani
-- Pouzivat TypeScript se striktnim rezimem
-- Dodrzovat existujici vzory
+- Frontend: Vue 3 Composition API, TypeScript strict
+- Backend: .NET konvence, async/await vsude
 ```
 
 Umistete do korene projektu pro sdileni s tymem, nebo `~/.claude/CLAUDE.md` pro osobni globalni kontext.
@@ -791,8 +810,8 @@ Tento tahak pokryva cele spektrum schopnosti Claude Code - od **zakladnich klave
 
 | Typ vyvojare | Nejdulezitejsi flagy | Nejdulezitejsi prikazy |
 |--------------|---------------------|------------------------|
-| **Frontend** | `--append-system-prompt` (a11y), `--allowedTools` (lint) | `/plan`, `@komponenta.tsx` |
-| **Backend** | `--max-turns`, `--output-format json`, pipe `\|` | `/model opus`, `! docker logs` |
+| **Frontend (Vue 3)** | `--append-system-prompt` (a11y), `--allowedTools` (lint) | `/plan`, `@komponenta.vue` |
+| **Backend (.NET)** | `--max-turns`, `--output-format json`, pipe `\|` | `/model opus`, `! dotnet test` |
 | **Fullstack** | `-c`, `-p`, `--model` | `/context`, `/compact`, `/resume` |
 | **DevOps** | `--output-format json`, `--max-budget-usd` | CI/CD integrace, hooks |
 

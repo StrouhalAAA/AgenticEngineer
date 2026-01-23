@@ -12,6 +12,8 @@ Educational repository for mastering Claude Code.
 |-------------|---|
 | [Lessons](lessons/) | 11 core modules |
 | [Reference](reference/) | Skills, Subagents, Hooks, Settings, Shortcuts |
+| [Agentic Coding](agentic-coding/) | Advanced training modules |
+| [Output-First Thinking (CZ)](agentic-coding/output-first-thinking.md) | Templating pro out-of-loop execution |
 | [Shortcuts (CZ)](reference/shortcuts-cz.md) | Kompletní tahák (80+ flagů, 30+ příkazů) |
 | [Release Notes](learn/claude-code/release-notes/) | Version tracking |
 | [Exercises](exercises/) | Hands-on practice |

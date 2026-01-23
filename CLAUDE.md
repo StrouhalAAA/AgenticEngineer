@@ -5,6 +5,13 @@ Educational repository teaching Claude Code fundamentals to development teams.
 
 > 🆕 **Updated for Claude Code 2.1.x** — January 2026
 
+## Tech Stack
+Examples in this repository are configured for:
+- **Frontend:** Vue 3 (Composition API), Pinia, Vite, Vitest
+- **Backend:** .NET 8, ASP.NET Core Web API, Entity Framework Core, SQL Server
+
+See `reference/shortcuts-cz.md` for tech-stack-specific Claude Code workflows.
+
 ## Structure
 - `START_HERE.md` - Begin here
 - `lessons/` - Core lessons in 4 sections

@@ -6,6 +6,7 @@
 
 | Date | Change | Link |
 |------|--------|------|
+| 2026-01-23 | Added Output-First Thinking training (CZ) | [output-first-thinking](agentic-coding/output-first-thinking.md) |
 | 2026-01-22 | Added Czech shortcuts/cheatsheet reference | [shortcuts-cz](reference/shortcuts-cz.md) |
 | 2026-01-11 | Added Terminal, Model, Status Line lessons | [Learning Path](lessons/README.md) |
 | 2026-01-11 | Added Expert Patterns (Parallel Sessions, Lean Memory) | [Expert Patterns](reference/expert-patterns/) |
@@ -71,10 +72,17 @@ Complete all lessons in order.
 ### Track 4: Command Design (1.5 hours)
 For developers building parameterized commands:
 - 02-commands → 03-skills
-- Practice with [ACBS Example Commands](.claude/commands/examples/acbs/)
+- Practice with [Example Commands](.claude/commands/examples/) (simple to complex progression)
+
+### Track 5: Agentic Workflows (2 hours)
+For teams building autonomous agent pipelines:
+- **Start**: [Output-First Thinking (CZ)](agentic-coding/output-first-thinking.md) — Core philosophy
+- 02-commands → 03-skills → 07-subagents → 08-forked-context
+- Practice: Create planning → implementation → execution chain
 
 ## Quick Links
 
+- **[Output-First Thinking (CZ)](agentic-coding/output-first-thinking.md)** — Proč a jak šablonovat práci s agenty
 - [Visual Schema (CZ)](visual-schema.md) — Mapa učení s Mermaid diagramy
 - [Learning Path Overview](lessons/README.md) — Thematic lesson navigation
 - [Reference Docs](reference/) — Look up syntax and examples
